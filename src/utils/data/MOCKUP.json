@@ -1,0 +1,43 @@
+[
+  {
+    "recordid": "599e62374ae6217e5afc80c07a2decb6681316fc",
+    "fields": {
+      "property_type": "Apartment",
+      "listing_url": "https://www.airbnb.com/rooms/292285",
+      "street": "Mentone St, San Diego, CA 92107, United States",
+      "city": "San Diego",
+      "country_code": "US",
+      "neighbourhood": "Point Loma Heights",
+      "host_location": "Los Angeles County, California, United States",
+      "rating": { "stars": "4", "comments": "149" },
+      "state": "CA",
+      "zipcode": "92107",
+      "price": "213 per night",
+      "coin": "ILS",
+      "host_since": "2011-03-27",
+      "amenities": "{TV,\"Cable TV\",Internet,\"Wireless Internet\",Kitchen,\"Free Parking on Premises\",\"Indoor Fireplace\",\"Buzzer/Wireless Intercom\",Heating,\"Family/Kid Friendly\",Washer,Dryer}",
+      "maximum_nights": 90,
+      "cancellation_policy": "strict",
+      "host_picture_url": "https://a1.muscache.com/im/users/466847/profile_pic/1442007498/original.jpg?aki_policy=profile_x_medium",
+      "description": "This is an EXCELLENT location, near the intimate and eclectic community of OCEAN BEACH & PT. LOMA. It is 1 mile from Dog Beach. Close to SEAWORLD, PACIFIC BEACH, MISSION BEACH, MISSION VALLEY, OLD TOWN, DOWNTOWN, THE AIRPORT, HARBOR ISLAND, SHELTER ISLAND, THE CABRILLO MONUMENT, SUNSET CLIFFS, THE SUNSHINE COMPANY, PEOPLE'S COOP, and many other highlights. High Ceilings give this minimalist condominium a spacious and modern feel. This recently remodeled 2+2 condo has a Master Bedroom with King sized bed and private bathroom. Smaller bedroom also has king sized bed. Master Bath has a full private bath and Large walk in closet. TV & Cable, plus wireless internet. Ceiling fans in all rooms help keep the close sea air tingling under your nose. There is also a washer & dryer inside the unit, as well as off street parking for 2 cars in front of unit. This is a small 7 unit condominium complex, on the ground floor. THE ENTIRE CONDO IS FOR RENT, but will also consider renting o",
+      "bedrooms": 2,
+      "smart_location": "San Diego, CA",
+      "number_of_reviews": 13,
+      "xl_picture_url": "https://a1.muscache.com/im/pictures/12308063/fdf7e31d_original.jpg?aki_policy=x_large",
+      "host_about": "Hi there, I am a homeowner and take great pride in my spaces. I invite you to share them with me through this unique travel booking website. Simply furnished, with comforting amenities, enjoy my places!",
+      "host_url": "https://www.airbnb.com/users/show/466847",
+      "name": "Sleekly Furnished OB Condo 2+2 BCH",
+      "medium_url": "https://a1.muscache.com/im/pictures/12308063/fdf7e31d_original.jpg?aki_policy=medium",
+      "bed_type": "Real Bed",
+      "country": "United States",
+      "host_response_time": "within a few hours",
+      "beds": 2,
+      "minimum_nights": 5,
+      "thumbnail_url": "https://a1.muscache.com/im/pictures/12308063/fdf7e31d_original.jpg?aki_policy=small",
+      "host_name": "Heather",
+      "house_rules": "No Smoking allowed in the common courtyard on the condominium premises, due to HOA rules. You may smoke outside the garage, in the front 'smoking area' ashtray provided. NO smoking on patios adjacent to condo. SLIDING DOORS CLOSED. This is a strict rule, as any smoking near open windows & patio areas go right into unit. No hanging out in main courtyard area. Unit has 2 private patio areas with seating for this purpose. No parties or socializing allowed other than the renters.",
+      "host_thumbnail_url": "https://a1.muscache.com/im/users/466847/profile_pic/1442007498/original.jpg?aki_policy=profile_small",
+      "room_type": "Entire home/apt"
+    }
+  }
+]
