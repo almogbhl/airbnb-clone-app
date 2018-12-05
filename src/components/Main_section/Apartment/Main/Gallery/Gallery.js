@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
+import * as c from '../../../../../styled/constants';
 
 class Gallery extends Component {
   onHover = (e, isMouseHover) => {
@@ -7,7 +9,7 @@ class Gallery extends Component {
 
     images.forEach(img => {
       if (isMouseHover === true) {
-        img.childNodes[0].style.opacity = "0.7";
+        img.childNodes[0].style.opacity = "0.6";
       } else {
         img.childNodes[0].style.opacity = "1";
       }
@@ -15,19 +17,19 @@ class Gallery extends Component {
     });
   };
 
+  calcHeight = () => {
+    const  { getHeight } = this.props;
+    let navHeight = this.refs.container.offsetHeight;
+    getHeight(navHeight);
+  }
 
   render() {
-    const images = [
-      "https://a0.muscache.com/im/pictures/7787384/03380852_original.jpg?aki_policy=xx_large",
-      "https://a0.muscache.com/im/pictures/7787334/c7dd5f4e_original.jpg?aki_policy=large",
-      "https://a0.muscache.com/im/pictures/7787269/a067102c_original.jpg?aki_policy=large",
-      "https://a0.muscache.com/im/pictures/7787236/97e2908f_original.jpg?aki_policy=large",
-      "https://a0.muscache.com/im/pictures/7786424/70660cf9_original.jpg?aki_policy=large"
-    ];
+    const { displayed_list } = this.props;
+    const images = displayed_list[15].images.img_gallery;
     const [main_img, img_box_2, img_box_3, img_box_4] = images;
 
     return (
-      <Container ref="container">
+      <Container ref="container" onMouseOver={this.calcHeight}>
         <Main_box>
           <Main_img
             img={main_img}
@@ -48,36 +50,36 @@ class Gallery extends Component {
             );
           }
         })}
-        {/* <Sub_box show743={true} show1028={true} onMouseOver={(e) => this.onHover(e, true)} onMouseOut={(e) => this.onHover(e, false)}>
-          <Sub_img img={img_box_2} />
-        </Sub_box>
-        <Sub_box show743={true} show1028={true} onMouseOver={(e) => this.onHover(e, true)} onMouseOut={(e) => this.onHover(e, false)}>
-          <Sub_img img={img_box_3} />
-        </Sub_box>
-        <Sub_box show743={false} show1028={true} onMouseOver={(e) => this.onHover(e, true)} onMouseOut={(e) => this.onHover(e, false)}>
-          <Sub_img img={img_box_4} />
-        </Sub_box>
-        <Sub_box show743={false} show1028={true} onMouseOver={(e) => this.onHover(e, true)} onMouseOut={(e) => this.onHover(e, false)}>
-          <Sub_img img={img_box_5} />
-        </Sub_box> */}
       </Container>
     );
   }
 }
 
-export default Gallery;
+function mapStateToProps(state) {
+  const { displayed_list } = state.browse;
+
+  return {
+    displayed_list
+  };
+}
+
+export default connect(mapStateToProps)(Gallery);
 
 const Container = styled.div`
   display: grid;
   background-color: black;
+  height: 36.8rem;
 
-  @media (min-width: 743px) {
+
+  @media (min-width: 743px) and (min-height: 700px) {
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: 2fr 1fr;
+    height: 46.8rem;
   }
-  @media (min-width: 1028px) {
+  @media (min-width: 1028px)  {
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: repeat(2, 1fr);
+    height: 72.8rem;
   }
 `;
 
@@ -96,17 +98,10 @@ const Main_img = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 368px;
+  height: 100%;
   width: 100%;
   transition: transform 0.5s ease, opacity 0.5s ease;
 
-  @media (min-height: 700px) {
-    height: 468px;
-  }
-
-  @media (min-height: 900px) {
-    height: 760px;
-  }
   @media (min-width: 743px) {
     background-position: center left;
     grid-row-start: 1;
@@ -120,25 +115,18 @@ const Main_img = styled.div`
 
 const Sub_box = styled.div`
   overflow: hidden;
-  visibility: hidden;
-  border: 1px solid #484848;
+  /* visibility: hidden; */
+  border: 1px solid ${c.grey};  
+  display: none;
 
   @media (min-width: 743px) {
-    visibility: ${props => (props.show743 === true ? "visible" : "hidden")};
-  }
-  @media (min-width: 1028px) {
-    /* visibility: visible; */
+    display: block;
+    /* visibility: ${props => (props.show743 === true ? "visible" : "hidden")}; */
   }
 `;
 
-const Sub_img = styled.div`
+const Sub_img = styled(Main_img)`
   background-image: url(${props => props.img});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-  transition: transform 0.5s ease, opacity 0.5s ease;
 
   @media (min-width: 743px) {
     &:hover {

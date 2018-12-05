@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import RateStar from "../Rating/rating";
+import * as c from '../../../../styled/constants';
 
 export default class Apartment extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class Apartment extends Component {
       country,
       price,
       coin,
-      img,
+      images,
       rating_stars,
       rating_total
     } = this.props;
@@ -19,12 +20,12 @@ export default class Apartment extends Component {
     return (
       <Box>
         <ImgBox>
-          <Img src={img} />
+          <Img src={images.preview} />
         </ImgBox>
 
         <InfoBox>
-          <H2>{country}</H2>
-          <P>Stylish Studio in {city} city</P>
+          <Title>{country}</Title>
+          <Sub_title>Stylish Studio in {city} city</Sub_title>
           <H3>{` ${price}$ per night · Free cancellation`}</H3>
           <RateStar stars={rating_stars}/>
           <Span>{rating_total}</Span>
@@ -37,52 +38,47 @@ export default class Apartment extends Component {
 const Box = styled.main`
   display: flex;
   flex-direction: column;
-  /* flex: 1 1 auto; */
-  margin-bottom: 25px;
+  margin-bottom: 2.5rem;
 `;
 
 const ImgBox = styled.div`
-  /* max-width: 743px; */
 `;
 
 const Img = styled.img`
   width: 100%;
-  border-radius: 4px;
+  border-radius: .4rem;
 `;
 const InfoBox = styled.div`
-  /* max-width: 250px; */
 `;
 
-const H2 = styled.h2`
-  margin: 0;
-  font-size: 12px;
-  color: #791210;
+const Title = styled.h2`
+  font-size: 1.2rem;
+  color: ${c.darkRed};
   text-transform: uppercase;
 `;
-const P = styled.p`
-  margin: 3px 0;
-  font-size: 16px;
-  color: #484848;
+const Sub_title = styled.p`
+  margin: .3rem 0;
+  font-size: 1.6rem;
+  color: ${c.grey};
   font-weight: 700;
 `;
 const H3 = styled.h3`
-  margin: 0;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-family: "Helvetica Neue", sans-serif;
   font-weight: lighter;
-  color: rgb(72, 72, 72);
-  line-height: 18px;
+  color: ${c.grey};
+  line-height: 1.8rem;
 `;
 
 const Span = styled.span`
-  color: #484848;
-  font-weight: 600;
-  margin-left: 3px;
+  color: ${c.grey};
+  font-weight: 900;
+  margin-left: .3rem;
   display: inline-block;
   vertical-align: center;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
   letter-spacing: normal;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, Roboto,
     "Helvetica Neue", sans-serif !important;
 `;

@@ -3,7 +3,9 @@ import styled from "styled-components";
 import Filter from './Filter/Filter';
 import { connect } from "react-redux";
 import { filter_list } from '../Main_section/Browse/Browse.action';
+import { flexbox } from '../../styled/functions';
 import Logo from "../../img/airbnb_logo_small.png";
+import NavBar from "./NavBar/Navbar";
 
 
 class TopBar extends Component {
@@ -13,14 +15,12 @@ class TopBar extends Component {
 
   onFormSubmit = (e) => {
     e.preventDefault();
-
-    
   }
 
   render() {
 
     const { original_list, do_filter_list } = this.props;
-    console.log(original_list)
+   
     return (
       <Header>
         <LogoBox>
@@ -29,6 +29,7 @@ class TopBar extends Component {
         <Form onSubmit={this.onFormSubmit}>
           <Filter list_data={original_list} on_filter={do_filter_list} /> 
         </Form>
+        <NavBar />
       </Header>
     );
   }
@@ -53,26 +54,28 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(TopBar);
 
 
-
 const Header = styled.header`
-  padding: 7px;
-  display: flex;
-  align-items: center;
+  padding: 0;
+  /* border: 1px solid red; */
+  ${flexbox({j:"space-between"})} 
   border-bottom: 1px solid lightgray;
 `;
 
 const LogoBox = styled.div`
+/* border: 1px solid red; */
+  flex-basis: 5%;
   cursor: pointer;
-  padding: 5px 15px;
+  padding: 1.5rem 1.5rem;
 `;
 const LogoImg = styled.img`
-  height: 40px;
+  height: 4rem;
 `;
 
 const Form = styled.form`
+  padding: 1.5rem 0;
+  /* border: 1px solid red; */
   flex-grow: 1;
-  max-width: 500px;
-  /* border: 1px solid tomato; */
-  margin-right: 20px;
+  /* flex-basis: 60%; */
+  /* margin-right: 2rem; */
 `;
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import { box_shadow_form, grey, border } from '../../../styled/constants';
 
 export default class Filter extends Component {
 
@@ -28,12 +29,17 @@ export default class Filter extends Component {
 }
 
 const Input = styled.input`
-  width: 100%;
-  padding: 12px;
-  border: 1px solid lightgray;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: #484848;
+  width: 45rem;
+  padding: 1.2rem;
+  ${border};
+  ${box_shadow_form};
+  color: ${grey};
   font-weight: 700;
-  border-radius: 4px;
-  font-size: 17px;
+  border-radius: .4rem;
+  font-size: 1.7rem;
+  transition: box-shadow 200ms ease-in;
+  
+  &:hover {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 4px 12px rgba(26, 26, 29, 0.08);
+  }
 `;
