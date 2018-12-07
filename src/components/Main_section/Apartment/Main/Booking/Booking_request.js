@@ -5,7 +5,7 @@ import { Section } from "../../../../../styled/styled.components";
 import * as c from "../../../../../styled/constants";
 import Star from "../../Rating/Rating_stars_icon";
 
-class Location extends Component {
+class Booking_request extends Component {
   render() {
     return (
       <Main>
@@ -41,9 +41,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Location);
+export default connect(mapStateToProps)(Booking_request);
 
 const Main = styled.div`
+  
   padding: 2rem 2.5rem;
   background-color: white;
   border-top: 1px solid ${c.lightGrey};
@@ -71,7 +72,7 @@ const Price_details = styled.span`
   margin-left: 0.3rem;
 `;
 const Reviews = styled.div`
-color: ${c.grey}`;
+color: ${c.grey};`;
 const Stars_box = styled.span``;
 const Num_stars = styled.span`
   font-size: 1.25rem;

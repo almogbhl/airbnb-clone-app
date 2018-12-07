@@ -6,6 +6,9 @@ import Footer from "./components/Footer/Footer";
 import Browse from "./components/Main_section/Browse/Browse";
 import ApartmentMain from "./components/Main_section/Apartment/Main/Apartment_main";
 import HomePage from "./components/Main_section/Home_page/Home_page";
+import { DivBorder } from "./styled/styled.components";
+
+
 
 class App extends Component {
   render() {
@@ -14,8 +17,9 @@ class App extends Component {
         <GlobalStyle />
         <TopBar />
         {/* <Browse /> */}
-        <ApartmentMain />
-        {/* <HomePage /> */}
+        {/* <ApartmentMain /> */}
+        <HomePage />
+        <DivBorder />
         <Footer />
       </Wrapper>
     );

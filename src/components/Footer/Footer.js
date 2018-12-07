@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { flexbox } from "../../styled/functions";
+
 import * as c from "../../styled/constants";
 
 class Footer extends Component {

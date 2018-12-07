@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-dates": "^17.1.4",
     "axios": "^0.18.0",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
+    "moment": "^2.22.2",
+    "react": "^16.6.3",
+    "react-addons-shallow-compare": "^15.6.2",
+    "react-dates": "^18.2.2",
+    "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",
     "react-scripts": "2.1.1",
+    "react-slick": "^0.23.2",
     "redux": "^4.0.1",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^4.0.3"
   },
   "scripts": {
@@ -19,7 +25,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  
   "eslintConfig": {
     "extends": "react-app"
   },

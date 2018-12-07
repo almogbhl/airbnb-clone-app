@@ -65,14 +65,14 @@ const LogoBox = styled.div`
 /* border: 1px solid red; */
   flex-basis: 5%;
   cursor: pointer;
-  padding: 1.5rem 1.5rem;
+  padding: 1.2rem 1.5rem;
 `;
 const LogoImg = styled.img`
-  height: 4rem;
+  height: 3.8rem;
 `;
 
 const Form = styled.form`
-  padding: 1.5rem 0;
+  padding: .8rem 0;
   /* border: 1px solid red; */
   flex-grow: 1;
   /* flex-basis: 60%; */

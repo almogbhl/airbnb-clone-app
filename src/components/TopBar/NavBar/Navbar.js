@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import * as c from '../../../styled/constants';
+import * as c from "../../../styled/constants";
 
 class NavBar extends Component {
   render() {
@@ -61,22 +61,21 @@ const Item = styled.li`
   cursor: pointer;
   border-bottom: 2px solid transparent;
   &:first-child {
-      min-width: 13.2rem;
+    min-width: 13.2rem;
   }
   &:hover {
-  border-bottom: 2px solid ${c.lighterGrey};
+    border-bottom: 2px solid ${c.lighterGrey};
   }
-  `;
+`;
 const Title = styled.a`
-
   font-size: 1.5rem;
   line-height: 2.2rem;
   font-weight: 600;
 `;
 const Avatar = styled.img`
-height: 3rem;
-width: 3rem;
-border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
 `;
 
 export default NavBar;

@@ -57,9 +57,16 @@ const Nav = styled.nav`
   display: ${props => (props.show ? "fixed" : "none")};
   align-items: center;
   ${c.border_grey};
+    
+
+  @media (min-width: 1028px) {
+    justify-content:center;
+  }
 `;
 const Item = styled.span`
   margin-left: 1rem;
+
+ 
 
   &:first-child {
       margin-left: 2.2rem;
@@ -81,5 +88,7 @@ const Button = styled.button`
   font-size: 1.4rem;
   line-height: 1.8rem;
   font-weight: bold;
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
 `;

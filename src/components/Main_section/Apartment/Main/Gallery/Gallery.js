@@ -70,17 +70,27 @@ const Container = styled.div`
   background-color: black;
   height: 36.8rem;
 
+@media (min-height: 700px) {
+  height: 46.8rem;
+}
+@media (min-height: 1028px) {
+  height: 52.8rem;
+}
 
-  @media (min-width: 743px) and (min-height: 700px) {
+  @media (min-width: 743px) {
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: 2fr 1fr;
-    height: 46.8rem;
+
   }
-  @media (min-width: 1028px)  {
+  @media (min-width: 1028px) {
     grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr); 
+  }
+
+  @media (min-width: 1028px) and (min-height: 900px) {
     height: 72.8rem;
   }
+
 `;
 
 const Main_box = styled.div`

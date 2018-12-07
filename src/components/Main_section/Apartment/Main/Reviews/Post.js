@@ -27,6 +27,7 @@ export default Post;
 const Container = styled.div`
   width: 100%;
   /* padding: 2.5rem 0; */
+  margin-top: 2.5rem;
   /* border-bottom: 1px solid lightgray; */
   &:last-child {
   border: none;
