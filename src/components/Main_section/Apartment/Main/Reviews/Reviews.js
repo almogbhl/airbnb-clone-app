@@ -1,23 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import RateStar from "../../Rating/Rating_stars_icon";
+import RateStar from "../../Rating/rating";
 import Rating_box from "./Rating_box";
-import Post from './Post';
-import {Section , DivBorder} from '../../../../../styled/styled.components';
+import Post from "./Post";
+import { Section, DivBorder } from "../../../../../styled/styled.components";
 
 class Reviews extends Component {
   render() {
+    const {
+      rating_stars,
+      rating_total,
+      rating_acurrancy,
+      rating_communication,
+      rating_cleanliness,
+      rating_location,
+      rating_check_in,
+      rating_value
+    } = this.props;
+
     return (
       <Container>
         <Section>
           <Title_box>
-            <Title>197 Reviews</Title>
-            <Stars>{<RateStar isBig={true} isActive={true} />}</Stars>
-            <Stars>{<RateStar isBig={true} isActive={true} />}</Stars>
-            <Stars>{<RateStar isBig={true} isActive={true} />}</Stars>
-            <Stars>{<RateStar isBig={true} isActive={true} />}</Stars>
-            <Stars>{<RateStar isBig={true} isActive={true} />}</Stars>
+            <Title>{`${rating_total} Reviews`}</Title>
+            <Stars><RateStar num={rating_stars} type="AP_main" size="2rem" /></Stars>
+           
           </Title_box>
           <Form>
             <Input type="search" placeholder="Search reviews" />
@@ -26,22 +34,22 @@ class Reviews extends Component {
         <DivBorder />
         <Section>
           <Rating>
-            <Rating_box />
-            <Rating_box />
-            <Rating_box />
-            <Rating_box />
-            <Rating_box />
-            <Rating_box />
+            <Rating_box num={rating_acurrancy} type="Acurrancy"/>
+            <Rating_box num={rating_communication} type="Communication"/>
+            <Rating_box num={rating_cleanliness} type="Cleanliness"/>
+            <Rating_box num={rating_value} type="Value"/>
+            <Rating_box num={rating_location} type="Location"/>
+            <Rating_box num={rating_check_in} type="Check_in"/>
           </Rating>
           <Post_box>
-              <Post />
-              <DivBorder />
-              <Post />
-              <DivBorder />
-              <Post />
-              <DivBorder />
-              <Post />
-              <DivBorder />
+            <Post />
+            <DivBorder />
+            <Post />
+            <DivBorder />
+            <Post />
+            <DivBorder />
+            <Post />
+            <DivBorder />
           </Post_box>
         </Section>
       </Container>
@@ -97,7 +105,7 @@ const Rating = styled.div`
   flex-direction: column;
   @media (min-width: 743px) {
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     justify-content: space-between;
-    }
+  }
 `;

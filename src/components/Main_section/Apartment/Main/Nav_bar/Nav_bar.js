@@ -5,7 +5,7 @@ import { Section } from "../../../../../styled/styled.components";
 import { drawBorder, flexbox } from "../../../../../styled/functions";
 import * as c from "../../../../../styled/constants";
 
-class Location extends Component {
+class Navbar extends Component {
   render() {
     return (
       <Nav ref="navBar" show={this.props.show}>
@@ -45,7 +45,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Location);
+export default connect(mapStateToProps)(Navbar);
 
 const Nav = styled.nav`
   position: fixed;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Route , withRouter} from 'react-router-dom';
 import Filter from './Filter/Filter';
 import { connect } from "react-redux";
 import { filter_list } from '../Main_section/Browse/Browse.action';
@@ -17,13 +18,17 @@ class TopBar extends Component {
     e.preventDefault();
   }
 
+  showHomePage = () => {
+    this.props.history.push('/');
+  }
+
   render() {
 
     const { original_list, do_filter_list } = this.props;
    
     return (
       <Header>
-        <LogoBox>
+        <LogoBox onClick={this.showHomePage} >
           <LogoImg src={Logo} />
         </LogoBox>
         <Form onSubmit={this.onFormSubmit}>
@@ -51,7 +56,7 @@ function mapDispatchToProps(dispatch) {
       do_filter_list: (fl) => dispatch(filter_list(fl)),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(TopBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopBar));
 
 
 const Header = styled.header`

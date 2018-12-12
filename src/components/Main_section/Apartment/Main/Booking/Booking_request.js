@@ -3,25 +3,23 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Section } from "../../../../../styled/styled.components";
 import * as c from "../../../../../styled/constants";
-import Star from "../../Rating/Rating_stars_icon";
+import RateStar from "../../Rating/rating";
 
 class Booking_request extends Component {
   render() {
+    const { price, rating_stars, rating_total } = this.props;
+    const amount = Math.round(price);
     return (
       <Main>
         <Info_box>
           <Price_box>
-            <Price>₪586</Price>
+            <Price>{`₪${amount}`}</Price>
             <Price_details>per night</Price_details>
           </Price_box>
           <Reviews>
             <Stars_box>
-              <Star isActive={true} />
-              <Star isActive={true} />
-              <Star isActive={true} />
-              <Star isActive={true} />
-              <Star isActive={true} />
-              <Num_stars>197</Num_stars>
+              <RateStar num={rating_stars} type="AP_main" size="1rem" />
+              <Num_stars>{rating_total}</Num_stars>
             </Stars_box>
           </Reviews>
         </Info_box>
@@ -44,7 +42,6 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Booking_request);
 
 const Main = styled.div`
-  
   padding: 2rem 2.5rem;
   background-color: white;
   border-top: 1px solid ${c.lightGrey};
@@ -54,14 +51,15 @@ const Main = styled.div`
   left: 0;
   display: flex;
   justify-content: space-between;
-  
+
   @media (min-width: 1028px) {
-  display: none;
-}
+    display: none;
+  }
 `;
 const Info_box = styled.div``;
 const Price_box = styled.div`
-color: ${c.grey};`;
+  color: ${c.grey};
+`;
 const Price = styled.span`
   font-weight: bold;
   font-size: 2.5rem;
@@ -72,7 +70,8 @@ const Price_details = styled.span`
   margin-left: 0.3rem;
 `;
 const Reviews = styled.div`
-color: ${c.grey};`;
+  color: ${c.grey};
+`;
 const Stars_box = styled.span``;
 const Num_stars = styled.span`
   font-size: 1.25rem;
@@ -81,11 +80,11 @@ const Num_stars = styled.span`
 `;
 const Request_box = styled.div``;
 const Button = styled.button`
-    padding: 1.4rem 2.5rem;
-    background-color: ${c.red};
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: .4rem;
-    font-size: 1.6rem;
+  padding: 1.4rem 2.5rem;
+  background-color: ${c.red};
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1.6rem;
 `;

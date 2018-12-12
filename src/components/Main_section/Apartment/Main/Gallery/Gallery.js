@@ -4,10 +4,15 @@ import styled from "styled-components";
 import * as c from '../../../../../styled/constants';
 
 class Gallery extends Component {
-  onHover = (e, isMouseHover) => {
-    let images = this.refs.container.childNodes;
 
-    images.forEach(img => {
+  componentDidMount() {
+    console.log(this.props);
+  }
+
+  onHover = (e, isMouseHover) => {
+    let imgs = this.refs.container.childNodes;
+
+    imgs.forEach(img => {
       if (isMouseHover === true) {
         img.childNodes[0].style.opacity = "0.6";
       } else {
@@ -24,9 +29,11 @@ class Gallery extends Component {
   }
 
   render() {
-    const { displayed_list } = this.props;
-    const images = displayed_list[15].images.img_gallery;
-    const [main_img, img_box_2, img_box_3, img_box_4] = images;
+ 
+    const { images } = this.props;
+  
+    const gallery = images.img_gallery;
+    const [main_img, img_box_2, img_box_3, img_box_4] = gallery;
 
     return (
       <Container ref="container" onMouseOver={this.calcHeight}>
@@ -37,10 +44,10 @@ class Gallery extends Component {
             onMouseOut={e => this.onHover(e, false)}
           />
         </Main_box>
-        {images.map(img => {
-          if (img !== images[0]) {
+        {gallery.map((img, i) => {
+          if (img !== gallery[0]) {
             return (
-              <Sub_box
+              <Sub_box key={i}
                 show743={true}
                 onMouseOver={e => this.onHover(e, true)}
                 onMouseOut={e => this.onHover(e, false)}

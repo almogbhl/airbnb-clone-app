@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import house_icon from '../../../../../img/house.png';
+import house_icon from "../../../../../img/house.png";
 
 class InfoBox extends Component {
   render() {
-    const { isSuperHost, propertyType, guests, bedrooms, bath  } = this.props;
-
+    const { superhost, guests, beds, bathrooms } = this.props;
 
     return (
       <Info_box>
@@ -13,8 +12,9 @@ class InfoBox extends Component {
           <Icon_img src={house_icon} />
         </Icon_box>
         <Des_box>
-          <Info_title>Entire house</Info_title>
-          <Info_des>5 guests · 1 bedroom · 4 beds · 1 bath</Info_des>
+          <Info_title>Entire Villa</Info_title>
+
+          <Info_des>{`${guests} guests · ${beds} beds · ${bathrooms} bath`}</Info_des>
         </Des_box>
       </Info_box>
     );
@@ -24,11 +24,11 @@ class InfoBox extends Component {
 export default InfoBox;
 
 const Info_box = styled.div`
-  padding-top:1.5rem;
+  padding-top: 1.5rem;
   display: flex;
 `;
 const Icon_box = styled.div`
-  padding-top: .3rem;
+  padding-top: 0.3rem;
   padding-right: 1rem;
   /* border: 1px solid red; */
 `;

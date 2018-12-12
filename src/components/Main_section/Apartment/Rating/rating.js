@@ -1,21 +1,26 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import RateStar from "./Rating_stars_icon";
-// import { start } from "repl";
+
 
 class RatingStars extends Component {
   createStars = () => {
 
-    const { stars } = this.props;
+    const { num, type, size } = this.props;
 
     let starArray = [];
-    const star = <RateStar isActive={true} />;
-
+    
     for (let i = 1; i <= 5; i++) {
-      if (i <= stars) {
+      const star = <RateStar key={i} size={size} isActive={true} />;
+      
+      if (i <= num) {
         starArray.push(star); 
       } else {
-        starArray.push(<RateStar isActive={false} />);
+        if(type === "AP_preview") {
+          starArray.push(<RateStar key={i} size={size} isActive={false} />);
+        } else {
+          break;
+        }
       }
     }
 

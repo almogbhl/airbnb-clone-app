@@ -8,10 +8,13 @@ import Map from './Map';
 
 class Location extends Component {
   render() {
+    const data = this.props;
+    const { lon, lnt } = this.props;
+    console.log(lon, lnt)
     return (
       <Section>
-        <Neighborhood />
-        <Map />
+        <Neighborhood {...data} />
+        <Map lat={lnt} lon={lon} />
       </Section>
     );
   }
@@ -26,3 +29,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Location);
+

@@ -10,10 +10,13 @@ class About_host extends Component {
       <Section>
         <About_box>
           <Des>
-            Originally from central west Qld. Spent 10 years overseas mostly as
-            an expat in Vanuatu. Now living on the Gold Coast with son, 15 and
-            daughter, 3. Playing polocrose for Gold Coast Club and QLD. Sold
-            financial planning business to have my daughter. Love champagne
+            Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus
+            aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.
+            Nam congue, risus semper porta volutpat, quam pede lobortis ligula,
+            sit amet eleifend pede libero quis orci. Nullam molestie nibh in
+            lectus. risus semper porta volutpat, quam pede lobortis ligula,
+            sit amet eleifend pede libero quis orci. Nullam molestie nibh in
+            lectus.
           </Des>
           <InfoBox>
             <Info_type>Languages:</Info_type>
@@ -47,25 +50,24 @@ export default connect(mapStateToProps)(About_host);
 const About_box = styled.div``;
 const Des = styled.span``;
 const InfoBox = styled.div`
-    margin-top: 1.2rem;
+  margin-top: 1.2rem;
 `;
 const Info_type = styled.span`
-    margin-right: .5rem;
+  margin-right: 0.5rem;
 `;
 const Info = styled.span`
   font-weight: bold;
 `;
 
-const Button = styled.button `
-    margin-top: 2rem;
-    /* width: 10rem; */
-    /* height: 2rem; */
-    border-radius: .4rem;
-    border: .1rem solid ${c.blue};
-    background-color: white;
-    color: ${c.blue};
-    font-weight: bold;
-    padding: .8rem 1.7rem;
-    font-size: 1.5rem;
-
-`
+const Button = styled.button`
+  margin-top: 2rem;
+  /* width: 10rem; */
+  /* height: 2rem; */
+  border-radius: 0.4rem;
+  border: 0.1rem solid ${c.blue};
+  background-color: white;
+  color: ${c.blue};
+  font-weight: bold;
+  padding: 0.8rem 1.7rem;
+  font-size: 1.5rem;
+`;

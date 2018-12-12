@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
+import Loader from "../../../../styled/Loader";
 import Overview from "./Overview/Overview";
 import Gallery from "./Gallery/Gallery";
 import Reviews from "./Reviews/Reviews";
@@ -17,6 +19,7 @@ class ApartmentMain extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     window.addEventListener("scroll", this.onScroll);
   }
   componentWillUnmount() {
@@ -36,30 +39,47 @@ class ApartmentMain extends Component {
   };
 
   render() {
-    return (
-      <Wrapper onScroll={this.onScroll}>
-        <NavBar show={this.state.isFixed} />
-        <Header>
-          <Gallery getHeight={newHeight => this.changeHeight(newHeight)} />
-        </Header>
-        <Conatainer>
-          <Main_section>
-            <Overview />
-            <Reviews />
-            <Host_profile />
-            <Location />
-          </Main_section>
-          <Booking_section>
-            <Booking_form />
-            <Booking_request />
-          </Booking_section>
-        </Conatainer>
-      </Wrapper>
-    );
+    const is_loading = this.props.is_loading;
+    const data = this.props.apartment_data;
+
+    if (is_loading === true) {
+      return <Loader></Loader>
+    } else {
+      return (
+        <Wrapper onScroll={this.onScroll}>
+          <NavBar show={this.state.isFixed} />
+          <Header>
+            <Gallery
+              images={data.images}
+              getHeight={newHeight => this.changeHeight(newHeight)}
+            />
+          </Header>
+          <Conatainer>
+            <Main_section>
+              <Overview {...data} />
+              <Reviews {...data} />
+              <Host_profile {...data} />
+              <Location {...data} />
+            </Main_section>
+            <Booking_section>
+              <Booking_form {...data} />
+              <Booking_request {...data} />
+            </Booking_section>
+          </Conatainer>
+        </Wrapper>
+      );
+    }
   }
 }
+function mapStateToProps(state) {
+  const { apartment_data, is_loading } = state.browse;
 
-export default ApartmentMain;
+  return {
+    apartment_data,
+    is_loading
+  };
+}
+export default connect(mapStateToProps)(ApartmentMain);
 
 const Wrapper = styled.div``;
 const Conatainer = styled.div`
@@ -69,8 +89,8 @@ const Conatainer = styled.div`
     align-items: center;
     /* border: 1px solid red; */
     margin: 0 auto;
-    max-width:110rem;
-    min-width:104rem;
+    max-width: 110rem;
+    min-width: 104rem;
   }
   @media (min-width: 1028px) {
     flex-direction: row;
@@ -103,6 +123,6 @@ const Booking_section = styled.div`
   position: relative;
   flex-basis: 40%;
   height: 290rem;
-  display:flex;
+  display: flex;
   justify-content: center;
 `;

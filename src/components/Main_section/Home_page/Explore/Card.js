@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+import { Route , withRouter} from 'react-router-dom';
 import styled from "styled-components";
 import * as c from "../../../../styled/constants";
 import { flexbox } from "../../../../styled/functions";
 import home_img from "../../../../img/explore_home.webp";
 
-export default class Card extends Component {
+ class Card extends Component {
+  showApartments = ()=> {
+    this.props.history.push('/browse');
+  }
   render() {
     return (
-      <Box>
+      <Box onClick={this.showApartments} >
         <Img_box />
         <Content>
           <Title_box>
@@ -18,7 +22,7 @@ export default class Card extends Component {
     );
   }
 }
-
+export default withRouter(Card)
 const Box = styled.div`
   height: 100%;
   max-width: 14.5rem;
@@ -29,6 +33,7 @@ const Box = styled.div`
   display: inline-flex;
   flex-direction: column;
   border: 1px solid ${c.lightGrey};
+  cursor: pointer;
 
   @media (min-width: 743px) {
 

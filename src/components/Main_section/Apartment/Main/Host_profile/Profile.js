@@ -5,18 +5,25 @@ import { Section } from "../../../../../styled/styled.components";
 
 class Host_profile extends Component {
   render() {
+    const {
+      host_first_name,
+      host_last_name,
+      city,
+      country,
+      rating_total
+    } = this.props;
     return (
       <Section>
         <User_box>
-          <User_name>Hosted by 'Full-name'</User_name>
+          <User_name>{`Hosted by ${host_first_name} ${host_last_name}`}</User_name>
           <Info_box>
-            <Location>Mount Nathan, Australia ·</Location>
+            <Location>{`${city}, ${country} ·`}</Location>
             <Joined>Joined in June 2012</Joined>
           </Info_box>
           <Values_box>
             <Value>
               <Icon />
-              319 Reviews
+             {` ${rating_total} Reviews`}
             </Value>
             <Value>
               <Icon />2 References

@@ -4,7 +4,11 @@ import Card from "./Card";
 import * as c from "../../../../styled/constants";
 import { flexbox } from "../../../../styled/functions";
 
-export default class Explore extends Component {
+class Explore extends Component {
+
+
+  
+
   render() {
     return (
       <Main>
@@ -19,7 +23,7 @@ export default class Explore extends Component {
     );
   }
 }
-
+export default Explore
 const Main = styled.div`
   /* border: 1px solid black; */
   color: ${c.grey};

@@ -8,34 +8,45 @@ import * as c from "../../../../../styled/constants";
 
 class Overview extends Component {
   render() {
+    const data = this.props;
+    const {
+      city,
+      country,
+      host_first_name,
+      host_last_name,
+      about_host
+    } = this.props;
     return (
       <Section>
         <Summery_Box>
           <Sub_title>Entire villa</Sub_title>
-          <Main_title>Luxury Gold Coast Hinterland Villa</Main_title>
+          <Main_title>Luxery Villa in {city}</Main_title>
           <Host_box>
-            <Host_Location>Mount Nathan</Host_Location>
+            <Host_Location>
+              {city}, {country}
+            </Host_Location>
             <Avatar_box>
               <Avatar_img
                 src="https://a0.muscache.com/im/pictures/3a022c97-44a4-4878-b6ad-3f60f0f5267c.jpg?aki_policy=profile_x_medium"
-                alt="Kerri-Lea User Profile"
-                title="Kerri-Lea User Profile"
+                alt={`${host_first_name} ${host_last_name} User Profile`}
+                title={`${host_first_name} ${host_last_name} User Profile`}
               />
             </Avatar_box>
           </Host_box>
         </Summery_Box>
         <Info_main>
-          <InfoBox />
-          <InfoBox />
+          <InfoBox {...data} />
+          <InfoBox {...data} />
+          <InfoBox {...data} />
         </Info_main>
         <DivBorder />
-        <Space />
+        <Space data={about_host} />
         <Contact>Contact host</Contact>
-        <DivBorder />
+        <DivBorder  />
       </Section>
     );
   }
-} 
+}
 
 export default Overview;
 

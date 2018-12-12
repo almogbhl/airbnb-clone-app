@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { Route, withRouter } from "react-router-dom";
 import RateStar from "../Rating/rating";
-import * as c from '../../../../styled/constants';
+import * as c from "../../../../styled/constants";
+import { getApartment } from "../../Browse/Browse.action";
 
-export default class Apartment extends Component {
+class Apartment extends Component {
+  showApartment = () => {
+    const data = this.props;
+    this.props.do_get_apartment(data)
+    this.props.history.push("/apartmentMain");
+  };
+
   render() {
     const {
       id,
@@ -18,7 +27,7 @@ export default class Apartment extends Component {
     } = this.props;
 
     return (
-      <Box>
+      <Box onClick={this.showApartment}>
         <ImgBox>
           <Img src={images.preview} />
         </ImgBox>
@@ -27,7 +36,7 @@ export default class Apartment extends Component {
           <Title>{country}</Title>
           <Sub_title>Stylish Studio in {city} city</Sub_title>
           <H3>{` ${price}$ per night · Free cancellation`}</H3>
-          <RateStar stars={rating_stars}/>
+          <RateStar num={rating_stars} type="AP_preview" size="1rem" />
           <Span>{rating_total}</Span>
         </InfoBox>
       </Box>
@@ -35,21 +44,30 @@ export default class Apartment extends Component {
   }
 }
 
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+      do_get_apartment: (data) => dispatch(getApartment(data))
+      
+  }
+}
+export default withRouter(connect(null, mapDispatchToProps)(Apartment));
+
+
 const Box = styled.main`
   display: flex;
   flex-direction: column;
   margin-bottom: 2.5rem;
+  cursor: pointer;
 `;
 
-const ImgBox = styled.div`
-`;
+const ImgBox = styled.div``;
 
 const Img = styled.img`
   width: 100%;
-  border-radius: .4rem;
+  border-radius: 0.4rem;
 `;
-const InfoBox = styled.div`
-`;
+const InfoBox = styled.div``;
 
 const Title = styled.h2`
   font-size: 1.2rem;
@@ -57,7 +75,7 @@ const Title = styled.h2`
   text-transform: uppercase;
 `;
 const Sub_title = styled.p`
-  margin: .3rem 0;
+  margin: 0.3rem 0;
   font-size: 1.6rem;
   color: ${c.grey};
   font-weight: 700;
@@ -73,7 +91,7 @@ const H3 = styled.h3`
 const Span = styled.span`
   color: ${c.grey};
   font-weight: 900;
-  margin-left: .3rem;
+  margin-left: 0.3rem;
   display: inline-block;
   vertical-align: center;
   font-size: 1.2rem;

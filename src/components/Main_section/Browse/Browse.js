@@ -1,26 +1,53 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
-import Apartment from "../Apartment/Preview/Apartment";
 import {flexbox} from '../../../styled/functions';
 import * as c from '../../../styled/constants';
+import { connect } from "react-redux";
+import { BrowserRouter, HashRouter, Route } from "react-router-dom";
+import { withRouter} from 'react-router';
+import Apartment from "../Apartment/Preview/Apartment";
+
 
 class Browse extends Component {
-  componentDidMount() {
-    console.log("Browse - componentDidMount");
+
+  state = {
+    data_array: []
+  }
+  componentDidMount = () => { 
+    window.scrollTo(0, 0);
+
+    const { displayed_list, filter_type } = this.props;
+    console.log(filter_type)
+    let filtered_array = [];
+
+    if (filter_type === "superHost") {
+      filtered_array = displayed_list.filter(
+        item => item.superhost == true && item.rating_stars > 3
+      );
+  
+    } else if (filter_type === "topRated") {
+      filtered_array = displayed_list.filter(item => item.rating_stars === 5);
+    } else {
+      filtered_array = displayed_list;
+    }
+
+
+    this.setState({ data_array: filtered_array });
+  };
+  
+  showApartment = (e, item) => {
+    // e.preventDefault();
+    this.props.history.push('/apartmentMain');
   }
 
   render() {
-    const { displayed_list } = this.props;
-   
-
     return (
       <MainBox>
-        <Title>Explore all {displayed_list.length} homes</Title>
+        <Title>Explore all {this.state.data_array.length} homes</Title>
         <Ul>
-          {displayed_list.map(item => (
+          {this.state.data_array.map(item => (
             <Li key={item.id}>
-              <Apartment {...item} />
+              <Apartment  {...item} />
             </Li>
           ))}
         </Ul>
@@ -30,10 +57,11 @@ class Browse extends Component {
 }
 
 function mapStateToProps(state) {
-  const { displayed_list } = state.browse;
+  const { displayed_list, filter_type } = state.browse;
 
   return {
-    displayed_list
+    displayed_list,
+    filter_type
   };
 }
 

@@ -10,7 +10,8 @@ export default class Filter extends Component {
         let txt = event.target.value;
 
         let filtered_list = list_data.filter( item =>
-            item.city.toLowerCase().includes(txt.toLowerCase()) || 
+            item.city.toLowerCase().includes(txt.toLowerCase()) 
+            || 
             item.country.toLowerCase().includes(txt.toLowerCase())
         )
         on_filter(filtered_list)
@@ -19,7 +20,7 @@ export default class Filter extends Component {
         return  <Input
         type="search"
         placeholder='Try "Helsinki"'
-        onChange={(e) => this.update_list(e)}
+        onClick={(e) => this.update_list(e)}
        
       /> 
     }

@@ -9,11 +9,13 @@ import {Section, DivBorder} from "../../../../../styled/styled.components";
 
 class Host_profile extends Component {
   render() {
+    const data = this.props;
+    const { superhost } = this.props;
     return (
       <Section>
-        <Profile />
+        <Profile {...data} />
         <DivBorder />
-        <Super_host />
+        <Super_host show={superhost}/>
         <DivBorder />
         <About_host />
         <DivBorder />

@@ -7,7 +7,7 @@ class Host_profile extends Component {
   render() {
     return (
       <Section>
-        <SuperHost_box>
+        <SuperHost_box show={this.props.show}>
           <Title>'Full-name' is Superhost ·</Title>
           <Des>
             Superhosts are experienced, highly rated hosts who are committed to
@@ -30,7 +30,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Host_profile);
 
 const SuperHost_box = styled.div`
-  
+  visibility: ${props => (props.show ? 'visible' : 'hidden')};
 `;
 const Title = styled.span`
 font-weight: bold;`;

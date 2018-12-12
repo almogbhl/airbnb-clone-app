@@ -2,18 +2,33 @@ import {
   FILTER_LIST,
   FETCHING_APARTMENTS,
   APARTMENTS_FETCHED,
-  FETCH_APARTMENTS_ERROR
+  FETCH_APARTMENTS_ERROR,
+  GET_APARTMENT
 } from "./Browse.action";
 
+import {  FILTER_TYPE } from '../Home_page/Filtered/Filitered.action';
+
 let initialState = {
+  apartment_data: {},
   original_list: [],
   displayed_list: [],
+  filter_type: "",
   is_loading: false,
   error_msg: ""
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case GET_APARTMENT:
+      return {
+        ...state,
+        apartment_data: action.payload
+      };
+    case FILTER_TYPE:
+      return {
+        ...state,
+        filter_type: action.payload
+      };
     case FILTER_LIST:
       return {
         ...state,

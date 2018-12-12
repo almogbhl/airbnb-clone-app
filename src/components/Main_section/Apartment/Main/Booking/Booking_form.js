@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { Section } from "../../../../../styled/styled.components";
 import * as c from "../../../../../styled/constants";
-import RateStar from "../../Rating/Rating_stars_icon";
+import RateStar from "../../Rating/rating";
 import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
 import { DateRangePicker } from "react-dates";
@@ -25,29 +25,19 @@ class Booking_form extends Component {
 
   render() {
     const { focusedInput, startDate, endDate } = this.state;
+    const { price, rating_stars, rating_total } = this.props;
+    const amount = Math.round(price);
 
     return (
       <Main>
         <Price_box>
-          <Price>₪254</Price>
+          <Price>{`₪${amount}`}</Price>
           <Price_detail>per night</Price_detail>
           <Reviews_box>
             <Star>
-              <RateStar isActive={true} />
+              <RateStar num={rating_stars} type="AP_main" size="1rem" />
             </Star>
-            <Star>
-              <RateStar isActive={true} />
-            </Star>
-            <Star>
-              <RateStar isActive={true} />
-            </Star>
-            <Star>
-              <RateStar isActive={true} />
-            </Star>
-            <Star>
-              <RateStar isActive={true} />
-            </Star>
-            <Num_stars>197</Num_stars>
+            <Num_stars>{rating_total}</Num_stars>
           </Reviews_box>
         </Price_box>
 
