@@ -39,6 +39,12 @@ class Filtered extends Component {
       this.setState({
         title: "Stay at top-rated homes"
       });
+    } else if (type === "world") {
+      filtered_array = displayed_list;
+
+      this.setState({
+        title: "Homes around the world"
+      });
     }
 
     //check screen size

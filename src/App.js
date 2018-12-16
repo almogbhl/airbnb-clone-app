@@ -37,6 +37,8 @@ class App extends Component {
   }
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+position:relative;
+`;
 
 export default App;

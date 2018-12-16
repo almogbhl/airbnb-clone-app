@@ -87,6 +87,8 @@ const Main = styled.div`
   display: none;
   border: 1px solid ${c.lightGrey};
   padding: 0 2.4rem;
+  z-index: 2;
+  margin-top: 2rem;
   @media (min-width: 1028px) {
     display: flex;
     flex-direction: column;

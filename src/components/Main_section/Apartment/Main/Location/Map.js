@@ -11,11 +11,11 @@ class Map extends Component {
       lat: 59.95,
       lng: 30.33
     },
-    zoom: 14
+    zoom: 6
   };
 
   componentDidMount = () => {
-    const {lat, lon} = this.props;
+    const { lat, lon } = this.props;
     const latitude = parseInt(lat);
     const lonitude = parseInt(lon);
 
@@ -28,6 +28,7 @@ class Map extends Component {
   };
 
   render() {
+   
     return (
       <Container>
         <Main_box>
@@ -58,12 +59,14 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Map);
 
 const Container = styled.div`
- /* border: 1px solid red; */
- /* width: 100%;
+  border: 1px solid red;
+  /* width: 100%;
   height: 100%; */
 `;
 
 const Main_box = styled.div`
+
+  z-index: 1;
   margin: 1rem 0;
   height: 20vh;
   width: 25vw;

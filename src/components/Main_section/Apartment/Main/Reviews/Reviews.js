@@ -7,25 +7,35 @@ import Post from "./Post";
 import { Section, DivBorder } from "../../../../../styled/styled.components";
 
 class Reviews extends Component {
+  create_posts = () => {
+    const items = [];
+    const posts_data = this.props.posts;
+      for(let i = 0; i < 8; i++ ) {
+        items.push( <Post key={i} data={posts_data[i]} /> )
+      }
+      return items;
+  };
+
   render() {
     const {
-      rating_stars,
-      rating_total,
-      rating_acurrancy,
-      rating_communication,
-      rating_cleanliness,
-      rating_location,
-      rating_check_in,
-      rating_value
-    } = this.props;
+      rating_stars='',
+      rating_total='',
+      rating_acurrancy='',
+      rating_communication='',
+      rating_cleanliness='',
+      rating_location='',
+      rating_check_in='',
+      rating_value=''
+    } = this.props.main;
 
     return (
       <Container>
         <Section>
           <Title_box>
             <Title>{`${rating_total} Reviews`}</Title>
-            <Stars><RateStar num={rating_stars} type="AP_main" size="2rem" /></Stars>
-           
+            <Stars>
+              <RateStar num={rating_stars} type="AP_main" size="2rem" />
+            </Stars>
           </Title_box>
           <Form>
             <Input type="search" placeholder="Search reviews" />
@@ -34,22 +44,15 @@ class Reviews extends Component {
         <DivBorder />
         <Section>
           <Rating>
-            <Rating_box num={rating_acurrancy} type="Acurrancy"/>
-            <Rating_box num={rating_communication} type="Communication"/>
-            <Rating_box num={rating_cleanliness} type="Cleanliness"/>
-            <Rating_box num={rating_value} type="Value"/>
-            <Rating_box num={rating_location} type="Location"/>
-            <Rating_box num={rating_check_in} type="Check_in"/>
+            <Rating_box num={rating_acurrancy} type="Acurrancy" />
+            <Rating_box num={rating_communication} type="Communication" />
+            <Rating_box num={rating_cleanliness} type="Cleanliness" />
+            <Rating_box num={rating_value} type="Value" />
+            <Rating_box num={rating_location} type="Location" />
+            <Rating_box num={rating_check_in} type="Check_in" />
           </Rating>
           <Post_box>
-            <Post />
-            <DivBorder />
-            <Post />
-            <DivBorder />
-            <Post />
-            <DivBorder />
-            <Post />
-            <DivBorder />
+            {this.create_posts()}
           </Post_box>
         </Section>
       </Container>

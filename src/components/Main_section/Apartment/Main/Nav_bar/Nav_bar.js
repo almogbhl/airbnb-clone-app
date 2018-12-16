@@ -56,6 +56,7 @@ const Nav = styled.nav`
   background-color: white;
   display: ${props => (props.show ? "fixed" : "none")};
   align-items: center;
+  z-index: 10;
   ${c.border_grey};
     
 

@@ -6,131 +6,198 @@ import { flexbox } from "../../styled/functions";
 import * as c from "../../styled/constants";
 
 class Footer extends Component {
+  state = {
+    expand: false
+  };
+
+  onExpand = () => {
+    if (this.state.expand !== true) {
+      this.setState({
+        expand: true
+      });
+    }
+  };
+  onClose = () => {
+    if (this.state.expand === true) {
+      this.setState({
+        expand: false
+      });
+    }
+  };
   render() {
-    return (
-      <Container>
-        <Wrapper>
-          <HBox>
-            <VBox>
-              <Title>Airbnb</Title>
-              <List>
-                <Item>
-                  <Link>Careers</Link>
-                </Item>
-                <Item>
-                  <Link>Press</Link>
-                </Item>
-                <Item>
-                  <Link>Policies</Link>
-                </Item>
-                <Item>
-                  <Link>Help</Link>
-                </Item>
-                <Item>
-                  <Link>Diversity & Belonging</Link>
-                </Item>
-              </List>
-            </VBox>
-            <VBox>
-              <Title>Discover</Title>
-              <List>
-                <Item>
-                  <Link>Trust & Safety</Link>
-                </Item>
-                <Item>
-                  <Link>Invite Friends</Link>
-                </Item>
-                <Item>
-                  <Link>Gift Cards</Link>
-                </Item>
-                <Item>
-                  <Link>Airbnb Citizen</Link>
-                </Item>
-                <Item>
-                  <Link>Business Travel</Link>
-                </Item>
-                <Item>
-                  <Link>Guidebooks</Link>
-                </Item>
-                <Item>
-                  <Link>Airbnbmag</Link>
-                </Item>
-                <Item>
-                  <Link>Events</Link>
-                </Item>
-              </List>
-            </VBox>
-            <VBox>
-              <Title>Hosting</Title>
-              <List>
-                <Item>
-                  <Link>Why Host</Link>
-                </Item>
-                <Item>
-                  <Link>Refer Hosts</Link>
-                </Item>
-                <Item>
-                  <Link>Hospitality</Link>
-                </Item>
-                <Item>
-                  <Link>Responsible Hosting</Link>
-                </Item>
-                <Item>
-                  <Link>Community Center</Link>
-                </Item>
-                <Item>
-                  <Link>Host an Experience</Link>
-                </Item>
-                <Item>
-                  <Link>Open Homes</Link>
-                </Item>
-              </List>
-            </VBox>
-            <VBox>
-              <Title>Airbnb</Title>
-              <List>
-                <Item>
-                  <Link>Terms</Link>
-                </Item>
-                <Item>
-                  <Link>Privacy</Link>
-                </Item>
-                <Item>
-                  <Link>Site Map</Link>
-                </Item>
-              </List>
-            </VBox>
-          </HBox>
-          <HBox_2>
-            <CopyRight_box>
-              <Logo_box>
-                <Logo />
-              </Logo_box>
-              <CopyRight>© Airbnb, Inc.</CopyRight>
-            </CopyRight_box>
-            <Tools_box>
-              <Tool>English</Tool>
-              <Tool>ILS - ₪</Tool>
-            </Tools_box>
-          </HBox_2>
-        </Wrapper>
-      </Container>
-    );
+    if (this.state.expand === true) {
+      return (
+        <Container>
+          <Wrapper>
+            <HBox>
+              <VBox>
+                <Title>Airbnb</Title>
+                <List>
+                  <Item>
+                    <Link>Careers</Link>
+                  </Item>
+                  <Item>
+                    <Link>Press</Link>
+                  </Item>
+                  <Item>
+                    <Link>Policies</Link>
+                  </Item>
+                  <Item>
+                    <Link>Help</Link>
+                  </Item>
+                  <Item>
+                    <Link>Diversity & Belonging</Link>
+                  </Item>
+                </List>
+              </VBox>
+              <VBox>
+                <Title>Discover</Title>
+                <List>
+                  <Item>
+                    <Link>Trust & Safety</Link>
+                  </Item>
+                  <Item>
+                    <Link>Invite Friends</Link>
+                  </Item>
+                  <Item>
+                    <Link>Gift Cards</Link>
+                  </Item>
+                  <Item>
+                    <Link>Airbnb Citizen</Link>
+                  </Item>
+                  <Item>
+                    <Link>Business Travel</Link>
+                  </Item>
+                  <Item>
+                    <Link>Guidebooks</Link>
+                  </Item>
+                  <Item>
+                    <Link>Airbnbmag</Link>
+                  </Item>
+                  <Item>
+                    <Link>Events</Link>
+                  </Item>
+                </List>
+              </VBox>
+              <VBox>
+                <Title>Hosting</Title>
+                <List>
+                  <Item>
+                    <Link>Why Host</Link>
+                  </Item>
+                  <Item>
+                    <Link>Refer Hosts</Link>
+                  </Item>
+                  <Item>
+                    <Link>Hospitality</Link>
+                  </Item>
+                  <Item>
+                    <Link>Responsible Hosting</Link>
+                  </Item>
+                  <Item>
+                    <Link>Community Center</Link>
+                  </Item>
+                  <Item>
+                    <Link>Host an Experience</Link>
+                  </Item>
+                  <Item>
+                    <Link>Open Homes</Link>
+                  </Item>
+                </List>
+              </VBox>
+              <VBox>
+                <Title>Airbnb</Title>
+                <List>
+                  <Item>
+                    <Link>Terms</Link>
+                  </Item>
+                  <Item>
+                    <Link>Privacy</Link>
+                  </Item>
+                  <Item>
+                    <Link>Site Map</Link>
+                  </Item>
+                </List>
+              </VBox>
+            </HBox>
+            <HBox_2>
+              <CopyRight_box>
+                <Logo_box>
+                  <Logo />
+                </Logo_box>
+                <CopyRight>© Airbnb, Inc.</CopyRight>
+              </CopyRight_box>
+              <Tools_box>
+                <Tool>English</Tool>
+                <Tool>ILS - ₪</Tool>
+              </Tools_box>
+            </HBox_2>
+          </Wrapper>
+          <Close onClick={this.onClose}>Close</Close>
+        </Container>
+      );
+    } else {
+      return (
+        <Expand_footer onClick={this.onExpand}>
+          Terms, Privacy, Currency & More
+        </Expand_footer>
+      );
+    }
   }
 }
 
 export default Footer;
 
+const Expand_footer = styled.div`
+  position: fixed;
+  bottom: 1.3rem;
+  right: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.2rem;
+  width: 26rem;
+  color: ${c.grey};
+  cursor: pointer;
+  font-size: 1.6rem;
+  background-color: white;
+  display: none;
+  z-index: 999;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 9px 3px;
+  @media (min-width: 743px) {
+    display: flex;
+  }
+`;
+
+const Close = styled.div`
+  position: absolute;
+  bottom: 1.3rem;
+  right: 5rem;
+  padding: 1rem 3rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  background-color: white;
+  font-size: 1.6rem;
+  align-items: center;
+  color: ${c.lighterGrey};
+  font-weight: bold;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 9px 3px;
+
+`;
+
 const Container = styled.footer`
-  display: flex;
+  background-color: white;
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   justify-content: center;
   width: 100%;
   height: 10rem;
-  padding: 4.8rem 2.4rem;
-  /* border: 1px solid red; */
-
+  padding: 2rem 2.4rem;
+  border-top: 1px solid ${c.lightGrey};
+z-index: 999;
   @media (min-width: 743px) {
-    height: 39.5rem;
+    height: 37.5rem;
+    display: flex;
   }
 `;
 
@@ -148,7 +215,7 @@ const HBox = styled.div`
     display: none;
   /* border-bottom: 1px solid ${c.lightGrey}; */
   @media (min-width: 743px) {
-    flex-basis: 75%;
+    flex-basis: 85%;
     display: flex;
   }
 `;
@@ -177,10 +244,13 @@ const Link = styled.a`
   color: ${c.lighterGrey};
 `;
 const HBox_2 = styled(HBox)`
-  flex-basis: 25%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @media (min-width: 743px) {
+    margin-bottom: 1.5rem;
+    flex-basis: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 const CopyRight_box = styled.div`
   display: flex;

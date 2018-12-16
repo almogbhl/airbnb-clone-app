@@ -5,22 +5,21 @@ import { Route, withRouter } from "react-router-dom";
 import RateStar from "../Rating/rating";
 import * as c from "../../../../styled/constants";
 import { getApartment } from "../../Browse/Browse.action";
+import { fetchPosts } from "./Apartment.action";
 
 class Apartment extends Component {
   showApartment = () => {
     const data = this.props;
-    this.props.do_get_apartment(data)
+    this.props.do_get_apartment(data);
+    this.props.do_fetchPosts();
     this.props.history.push("/apartmentMain");
   };
 
   render() {
     const {
-      id,
       city,
-      street,
       country,
       price,
-      coin,
       images,
       rating_stars,
       rating_total
@@ -45,12 +44,15 @@ class Apartment extends Component {
 }
 
 
+
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-      do_get_apartment: (data) => dispatch(getApartment(data))
+      do_get_apartment: (data) => dispatch(getApartment(data)),
+      do_fetchPosts: () => dispatch(fetchPosts())
       
   }
 }
+
 export default withRouter(connect(null, mapDispatchToProps)(Apartment));
 
 

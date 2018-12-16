@@ -61,6 +61,7 @@ export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopBar));
 
 const Header = styled.header`
   padding: 0;
+  background-color: white;
   /* border: 1px solid red; */
   ${flexbox({j:"space-between"})} 
   border-bottom: 1px solid lightgray;

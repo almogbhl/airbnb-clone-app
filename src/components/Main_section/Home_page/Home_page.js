@@ -18,6 +18,7 @@ export default class HomePage extends Component {
             <Filtered type="superHost"/>
             <CityBreak />
             <Filtered type="topRated"/>
+            <Filtered type="world"/>
         </Wrapper>
 
     );

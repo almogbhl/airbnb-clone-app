@@ -22,7 +22,7 @@ export const fetchApartments = ()=> {
 		
 		dispatch({ type: FETCHING_APARTMENTS })
 	
-		const API = "/mock-data1.json"
+		const API = "/api/homepage"
 
 		return  fetch(API)
 				.then(res => res.json())

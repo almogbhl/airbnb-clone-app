@@ -4,17 +4,17 @@ import styled from "styled-components";
 
 class Post extends Component {
   render() {
-    const { } = this.props;
-
+    const { avatar, first_name, date, comment } = this.props.data;
+    console.log(first_name, avatar)
 
     return (
       <Container>
           <User_box>
-              <User_avatar src="https://a0.muscache.com/im/pictures/e2410fec-aa88-489e-91fd-08ef3b621e07.jpg?aki_policy=profile_x_medium" alt="name"/>
-              <User_name>First Name</User_name>
+              <User_avatar src={avatar} alt="name"/>
+              <User_name>{first_name}</User_name>
           </User_box>
           <User_post>
-              <Post_msg>Wonderful, tranquil, relaxing . Cannot recommend highly enough. Kerri-lee is an awesome host.</Post_msg>
+              <Post_msg>{comment}</Post_msg>
           </User_post>
       </Container>
     );
@@ -26,9 +26,9 @@ export default Post;
 
 const Container = styled.div`
   width: 100%;
-  /* padding: 2.5rem 0; */
-  margin-top: 2.5rem;
-  /* border-bottom: 1px solid lightgray; */
+  padding: 2.5rem 0;
+  /* margin-top: 2.5rem; */
+  border-bottom: 1px solid lightgray;
   &:last-child {
   border: none;
   padding-bottom: 0;

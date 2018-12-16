@@ -34,13 +34,14 @@ class ApartmentMain extends Component {
   };
 
   changeHeight = newHeight => {
-    console.log(newHeight);
+    // console.log(newHeight);
     this.setState({ galleryHeight: newHeight + 40 });
   };
 
   render() {
-    const is_loading = this.props.is_loading;
-    const data = this.props.apartment_data;
+    // const is_loading = this.props.is_loading;
+    const data = this.props.apartment_data || {};
+    const { posts_data, is_loading } = this.props;
 
     if (is_loading === true) {
       return <Loader></Loader>
@@ -50,14 +51,14 @@ class ApartmentMain extends Component {
           <NavBar show={this.state.isFixed} />
           <Header>
             <Gallery
-              images={data.images}
+              images={data}
               getHeight={newHeight => this.changeHeight(newHeight)}
             />
           </Header>
           <Conatainer>
             <Main_section>
               <Overview {...data} />
-              <Reviews {...data} />
+              <Reviews main={data} posts={posts_data} />
               <Host_profile {...data} />
               <Location {...data} />
             </Main_section>
@@ -73,10 +74,12 @@ class ApartmentMain extends Component {
 }
 function mapStateToProps(state) {
   const { apartment_data, is_loading } = state.browse;
+  const { posts_data } = state.ApartmentMain;
 
   return {
     apartment_data,
-    is_loading
+    is_loading,
+    posts_data
   };
 }
 export default connect(mapStateToProps)(ApartmentMain);
@@ -94,7 +97,7 @@ const Conatainer = styled.div`
   }
   @media (min-width: 1028px) {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
   }
 `;
 const Header = styled.div`
