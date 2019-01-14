@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { filterType } from "../Filtered/Filitered.action";
 
-
 class Card extends Component {
+  state = {
+    move: 333
+  };
+
   move = () => {
     const index = this.props.index;
     const card = this.refs.box || 333;
@@ -26,7 +29,12 @@ class Card extends Component {
 
     return (
       <Link to={`/homes`}>
-        <Box onClick={this.show_full_list} ref="box" move={this.move}>
+        <Box
+          onClick={this.show_full_list}
+          ref="box"
+          move={this.move}
+          size={this.props.size}
+        >
           <Img src={src} />
           <Gradiant />
           <Content>
@@ -42,30 +50,36 @@ class Card extends Component {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     do_filter_type: type => dispatch(filterType(type))
-  }
+  };
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(Card));
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Card)
+);
 
 const Box = styled.div`
   margin-right: 1.5rem;
   transform: translateX(-${props => props.move}px);
   transition: transform 0.5s;
   position: relative;
- 
-  width: calc(50vw - 40px);
-  
 
-  @media (min-width: 694px) {
-    width: calc(34vw - 40px);
+  /* 15px of margin-right,  */
+  width: ${props => props.size / 2 - 15}px;
+
+  @media (min-width: 700px) {
+    width: ${props => props.size / 3 - 15}px;
   }
-
-  @media (min-width: 872px) {
-    width: calc(26vw - 40px);
+  @media (min-width: 900px) {
+    width: ${props => props.size / 4 - 15}px;
   }
   @media (min-width: 1128px) {
-    width: calc(24vw - 95px)
+    width: ${props => props.size / 5 - 15}px;
   }
+
+
 `;
 const Img = styled.img`
   border-radius: 0.3rem;
@@ -73,6 +87,7 @@ const Img = styled.img`
   object-position: center;
   width: 100%;
   height: 100%;
+  min-width: 100%;
 `;
 const Gradiant = styled.div`
   background: linear-gradient(
@@ -87,7 +102,7 @@ const Gradiant = styled.div`
   );
 
   width: 100%;
-  height: 100%;
+  height: 99%;
   position: absolute;
   top: 0;
   border-radius: 0.3rem;
@@ -97,14 +112,11 @@ const Content = styled.div`
   top: 70%;
   left: 50%;
   transform: translateX(-50%);
-  /* border: 1px solid red; */
   color: white;
-  /* background-color: rgba(0,0,0,0.3);  */
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 100%;
-  /* border: 1px solid red; */
 `;
 const Title = styled.h3`
   font-size: 1.6rem;

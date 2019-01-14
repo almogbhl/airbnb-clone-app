@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   margin-top: 2rem;
   padding: 0 2.5rem;
 
-  @media (min-width: 1130px) {
+  @media (min-width: 1128px) {
     padding: 0 8rem;
   }
 `;

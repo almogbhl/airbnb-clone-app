@@ -15,18 +15,22 @@ class Explore extends Component {
       <Main>
         <Title>Explore Airbnb</Title>
 
-        <Nav_card draggable="true">
-          <Card type={"Homes"} img={imgs[0]} />
-          <Card type={"Experiences"} img={imgs[1]} />
-          <Card type={"Restaurants"} img={imgs[2]} />
-        </Nav_card>
+        <Nav_box>
+          <Nav_card draggable="true">
+            <Card type={"Homes"} img={imgs[0]} />
+            <Card type={"Experiences"} img={imgs[1]} />
+            <Card type={"Restaurants"} img={imgs[2]} />
+          </Nav_card>
+        </Nav_box>
       </Main>
     );
   }
 }
 export default Explore;
-const Main = styled.div`
+const Main = styled.div `
   color: ${c.grey};
+`
+const Nav_box = styled.div`
   overflow: scroll;
 
   [draggable="true"] {
@@ -39,8 +43,13 @@ const Main = styled.div`
 
   @media (min-width: 500px) {
     overflow: hidden;
+    [draggable="true"] {
+      cursor: auto;
+    }
   }
 `;
+
+
 
 const Title = styled.h1`
   font-size: 2.5rem;

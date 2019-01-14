@@ -12,47 +12,54 @@ class CityBreak extends Component {
     max_index: 7,
     nav_width: 0,
     prev_visibility: false,
-    next_visibility: true
+    next_visibility: true,
+    screen_size: 400
   };
 
-  // componentDidMount() {
-  //   this.updateDimensions();
-  // }
+  componentWillMount = () => {
+    this.updateScreenSize();
+    window.addEventListener("resize", this.updateDimensions);
+  };
+  componentWillUnmount = () => {
+    window.removeEventListener("resize", this.updateDimensions);
+  };
 
-  // componentWillMount = () => {
-  //   window.addEventListener("resize", this.updateDimensions);
-  // };
-  // componentWillUnmount = () => {
-  //   window.removeEventListener("resize", this.updateDimensions);
-  // };
+  updateScreenSize = () => {
+    let screen_size = window.innerWidth;
+    if (screen_size >= 1128) {
+      screen_size -= 160 - 15; // 160 of padding, 15 of margin-left of last-child
+    } else {
+      screen_size -= 50 - 15; // 50 of padding
+    }
 
-  // updateDimensions = () => {
-  //   let data = this.props.cities_list;
-  //   let nav = this.refs.Nav_card;
-  //   console.log(nav)
-  //   let card_width = nav.childNodes[0].clientWidth;
-  //   let nav_width = nav.clientWidth;
-  //   let max_index = data.length - Math.floor(nav_width / card_width);
+    this.setState({ screen_size });
+  };
 
-  //   this.setState({
-  //     max_index
-  //   });
-  // };
+  updateDimensions = () => {
+    this.updateScreenSize();
+
+    let data = this.props.cities_list;
+    let nav = this.refs.Nav_card;
+
+    let card_width = nav.childNodes[0].clientWidth;
+    let nav_width = nav.clientWidth;
+    let max_index = data.length - Math.floor(nav_width / card_width);
+
+    this.setState({
+      max_index
+    });
+  };
 
   nextSlide = () => {
+    this.updateDimensions();
+
     const index = this.state.index;
     const max_index = this.state.max_index;
 
-    this.setState(
-      {
-        index: index + 1,
-        prev_visibility: true
-      },
-      () => {
-        console.log("index: ", index);
-        console.log("max_index: ", max_index);
-      }
-    );
+    this.setState({
+      index: index + 1,
+      prev_visibility: true
+    });
 
     // WHEN THE INDEX IS EQUAL TO THE LAST CARD INDEX
     if (index === max_index) {
@@ -65,15 +72,9 @@ class CityBreak extends Component {
     const index = this.state.index;
     const max_index = this.state.max_index;
 
-    this.setState(
-      {
-        index: index - 1
-      },
-      () => {
-        console.log("index: ", index);
-        console.log("max_index: ", max_index);
-      }
-    );
+    this.setState({
+      index: index - 1
+    });
 
     if (index <= 0) {
       this.setState({
@@ -100,11 +101,18 @@ class CityBreak extends Component {
       return (
         <Main>
           <Title>Take a city break in Europe</Title>
-          <Nav_card draggable="true" ref="Nav_card">
-            {cities_list.map((item, i) => (
-              <Card key={i} data={item} index={this.state.index} />
-            ))}
-          </Nav_card>
+          <Nav_box>
+            <Nav_card draggable="true" ref="Nav_card">
+              {cities_list.map((item, i) => (
+                <Card
+                  key={i}
+                  data={item}
+                  index={this.state.index}
+                  size={this.state.screen_size}
+                />
+              ))}
+            </Nav_card>
+          </Nav_box>
           <Prev show={this.state.prev_visibility}>
             <Link onClick={this.prevSlide}>&#10094;</Link>
           </Prev>
@@ -140,6 +148,9 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+ 
+`;
+const Nav_box = styled.div `
   overflow: scroll;
 
   [draggable="true"] {
@@ -152,8 +163,11 @@ const Main = styled.div`
 
   @media (min-width: 500px) {
     overflow: hidden;
+    [draggable="true"] {
+      cursor: auto;
+    }
   }
-`;
+`
 
 const Nav_card = styled.div`
   display: flex;
@@ -170,7 +184,7 @@ const Next = styled.div`
   cursor: pointer;
   position: absolute;
   top: 55%;
-  right: -40px;
+  right: -50px;
   transform: translate(-50%, -50%);
   display: none;
   justify-content: center;

@@ -4,9 +4,8 @@ import styled from "styled-components";
 
 class Post extends Component {
   render() {
-    const { avatar, first_name, date, comment } = this.props.data;
-    console.log(first_name, avatar)
-
+    const { avatar, first_name, comment } = this.props.data;
+    
     return (
       <Container>
           <User_box>
