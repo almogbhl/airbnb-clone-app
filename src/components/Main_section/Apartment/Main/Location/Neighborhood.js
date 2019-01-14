@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Section } from "../../../../../styled/styled.components";
 import * as c from "../../../../../styled/constants";
 
 class Neighborhood extends Component {
   render() {
     const {host_first_name, host_last_name, street, city, country} = this.props;
     return (
-      <Main_box>
+      <Main_box id="location">
         <Title>The neighborhood</Title>
         <Des>
           {`${host_first_name} ${host_last_name}’s home is located in ${street}, ${city}, ${country}.`}

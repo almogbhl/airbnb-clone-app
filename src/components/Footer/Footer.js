@@ -7,8 +7,36 @@ import * as c from "../../styled/constants";
 
 class Footer extends Component {
   state = {
-    expand: false
+    expand: false,
+    showCloseButton: true,
+    expandButtonPosition: 'fixed'
   };
+
+  componentWillMount() {
+    this.updateFooterMode();
+  }
+  componentWillUnmount() {
+    this.updateFooterMode();
+  }
+
+  updateFooterMode = () => {
+    let { filter_type } = this.props;
+  
+    if(filter_type === 'roomMode') {
+      this.setState({
+        expand: true,
+        showCloseButton: false,
+        expandButtonPosition: 'static'
+      })
+    } else {
+      this.setState({
+        expand: false,
+        showCloseButton: true,
+        expandButtonPosition: 'fixed'
+      })
+    }
+  }
+
 
   onExpand = () => {
     if (this.state.expand !== true) {
@@ -24,10 +52,11 @@ class Footer extends Component {
       });
     }
   };
+  
   render() {
     if (this.state.expand === true) {
       return (
-        <Container>
+        <Container position={this.state.expandButtonPosition}>
           <Wrapper>
             <HBox>
               <VBox>
@@ -133,7 +162,7 @@ class Footer extends Component {
               </Tools_box>
             </HBox_2>
           </Wrapper>
-          <Close onClick={this.onClose}>Close</Close>
+          <Close show={this.state.showCloseButton} onClick={this.onClose}>Close</Close>
         </Container>
       );
     } else {
@@ -146,7 +175,18 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+function mapStateToProps(state) {
+  const { filter_type } = state.homepage;
+
+  return {
+    filter_type
+  };
+}
+
+export default 
+  connect(
+    mapStateToProps
+  )(Footer);
 
 const Expand_footer = styled.div`
   position: fixed;
@@ -180,29 +220,28 @@ const Close = styled.div`
   color: ${c.lighterGrey};
   font-weight: bold;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 9px 3px;
-
+  display: ${props => props.show ? 'flex' : 'none'};
 `;
 
 const Container = styled.footer`
   background-color: white;
   display: none;
-  position: fixed;
+  position: ${props => props.position};
   bottom: 0;
   left: 0;
   justify-content: center;
   width: 100%;
   height: 10rem;
   padding: 2rem 2.4rem;
-  border-top: 1px solid ${c.lightGrey};
-z-index: 999;
-  @media (min-width: 743px) {
+  z-index: 999;
+  @media (min-width: 1028px) {
+    border-top: 1px solid ${c.lightGrey};
     height: 37.5rem;
     display: flex;
   }
 `;
 
 const Wrapper = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -213,7 +252,6 @@ const Wrapper = styled.div`
 `;
 const HBox = styled.div`
     display: none;
-  /* border-bottom: 1px solid ${c.lightGrey}; */
   @media (min-width: 743px) {
     flex-basis: 85%;
     display: flex;

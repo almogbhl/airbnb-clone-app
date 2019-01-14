@@ -1,35 +1,54 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { HashLink as Link } from "react-router-hash-link";
 import styled from "styled-components";
-import { Section } from "../../../../../styled/styled.components";
-import { drawBorder, flexbox } from "../../../../../styled/functions";
 import * as c from "../../../../../styled/constants";
 
 class Navbar extends Component {
+  scrollTo = e => {
+    e.preventDefault();
+  };
+
   render() {
     return (
-      <Nav ref="navBar" show={this.props.show}>
+      <Nav show={this.props.show}>
         <Box>
           <Item>
-            <Button type="button">Overview</Button>
+            <Link smooth to={`/rooms/${this.props.roomid}/#overview`}>
+              <Button onClick={this.scrollTo} type="button">
+                Overview
+              </Button>
+            </Link>
           </Item>
         </Box>
         <Box>
           <Dot> · </Dot>
           <Item>
-            <Button type="button">Reviews</Button>
+            <Link smooth to={`/rooms/${this.props.roomid}/#reviews`}>
+              <Button onClick={this.scrollTo} type="button">
+                Reviews
+              </Button>
+            </Link>
           </Item>
         </Box>
         <Box>
           <Dot> · </Dot>
           <Item>
-            <Button type="button">The Host</Button>
+            <Link smooth to={`/rooms/${this.props.roomid}/#profile`}>
+              <Button onClick={this.scrollTo} type="button">
+                The Host
+              </Button>
+            </Link>
           </Item>
         </Box>
         <Box>
           <Dot> · </Dot>
           <Item>
-            <Button type="button">Location</Button>
+            <Link smooth to={`/rooms/${this.props.roomid}/#location`}>
+              <Button onClick={this.scrollTo} type="button">
+                Location
+              </Button>
+            </Link>
           </Item>
         </Box>
       </Nav>
@@ -58,19 +77,16 @@ const Nav = styled.nav`
   align-items: center;
   z-index: 10;
   ${c.border_grey};
-    
 
-  @media (min-width: 1028px) {
-    justify-content:center;
+  @media (min-width: 743px) {
+    justify-content: center;
   }
 `;
 const Item = styled.span`
   margin-left: 1rem;
 
- 
-
   &:first-child {
-      margin-left: 2.2rem;
+    margin-left: 2.2rem;
   }
 `;
 const Box = styled.div`

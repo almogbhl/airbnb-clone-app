@@ -4,7 +4,7 @@ import house_icon from "../../../../../img/house.png";
 
 class InfoBox extends Component {
   render() {
-    const { superhost, guests, beds, bathrooms } = this.props;
+    const { guests, beds, bathrooms } = this.props;
 
     return (
       <Info_box>

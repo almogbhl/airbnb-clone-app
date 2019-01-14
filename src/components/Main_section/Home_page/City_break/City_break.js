@@ -1,109 +1,93 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import * as c from "../../../../styled/constants";
-import { flexbox } from "../../../../styled/functions";
 import Card from "./Card";
-import { Europe_images } from "../../../../utils/data/city_break_imgs";
+import CityLoader from "../../../../styled/Loaders/City_loader";
 
-export default class CityBreak extends Component {
+class CityBreak extends Component {
   state = {
     direction: "",
     index: 0,
-    max_index: 0,
+    max_index: 7,
     nav_width: 0,
     prev_visibility: false,
     next_visibility: true
   };
 
-  componentDidMount = () => {
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions);
-  };
-  componentWillUnmount = () => {
-    window.removeEventListener("resize", this.updateDimensions);
-  };
+  // componentDidMount() {
+  //   this.updateDimensions();
+  // }
 
-  updateDimensions = () => {
-    let nav = this.refs.Nav_card;
-    let card_width = nav.childNodes[0].clientWidth;
-    let nav_width = nav.clientWidth;
-    const max_index = Europe_images.length - Math.floor(nav_width / card_width);
+  // componentWillMount = () => {
+  //   window.addEventListener("resize", this.updateDimensions);
+  // };
+  // componentWillUnmount = () => {
+  //   window.removeEventListener("resize", this.updateDimensions);
+  // };
 
-    this.setState({
-      max_index
-    });
-  };
+  // updateDimensions = () => {
+  //   let data = this.props.cities_list;
+  //   let nav = this.refs.Nav_card;
+  //   console.log(nav)
+  //   let card_width = nav.childNodes[0].clientWidth;
+  //   let nav_width = nav.clientWidth;
+  //   let max_index = data.length - Math.floor(nav_width / card_width);
+
+  //   this.setState({
+  //     max_index
+  //   });
+  // };
 
   nextSlide = () => {
     const index = this.state.index;
     const max_index = this.state.max_index;
-    
 
-    this.setState(previousState =>({
-      direction: "minus",
-      index: previousState.index + 1,
-      prev_visibility: true
-    }));
-
-    if(index === max_index) {
-    this.setState({
-      next_visibility: false
-    });
-    } else {
-      this.setState({
-        next_visibility: true
-      })
-    }
-    console.log('index: ', index)
-    console.log('max_index: ', max_index)
-  }
-  prevSlide = () => {
-    const index = this.state.index;
-    const max_index = this.state.max_index;
-
-    this.setState(previousState => ({
-      direction: "plus",
-      index: previousState.index - 1
-    }));
-
-
-    console.log('index: ', index)
-    console.log('max_index: ', max_index)
-  }
-
-
-
-
-  move = (e, dir) => {
-    let index = this.state.index;
-    let max_index = this.state.max_index;
-    console.log("index: ", index);
-    console.log("max_index: ", max_index);
-
-    if (dir === "minus") {
-      this.setState({
-        direction: dir,
+    this.setState(
+      {
         index: index + 1,
         prev_visibility: true
-      });
-    }
-    if (dir === "plus") {
-      this.setState({
-        direction: dir,
-        index: index - 1
-      });
-    }
-    if (index < 0) {
-      this.setState({
-        prev_visibility: false
-      });
-    }
+      },
+      () => {
+        console.log("index: ", index);
+        console.log("max_index: ", max_index);
+      }
+    );
+
+    // WHEN THE INDEX IS EQUAL TO THE LAST CARD INDEX
     if (index === max_index) {
       this.setState({
         next_visibility: false
       });
     }
-    if (index < max_index) {
+  };
+  prevSlide = () => {
+    const index = this.state.index;
+    const max_index = this.state.max_index;
+
+    this.setState(
+      {
+        index: index - 1
+      },
+      () => {
+        console.log("index: ", index);
+        console.log("max_index: ", max_index);
+      }
+    );
+
+    if (index <= 0) {
+      this.setState({
+        prev_visibility: false
+      });
+    }
+
+    if (index > 0) {
+      this.setState({
+        prev_visibility: true
+      });
+    }
+
+    if (index > max_index) {
       this.setState({
         next_visibility: true
       });
@@ -111,25 +95,44 @@ export default class CityBreak extends Component {
   };
 
   render() {
-    return (
-      <Main>
-        <Title>Take a city break in Europe</Title>
-
-        <Nav_card ref="Nav_card">
-          {Europe_images.map((item, i) => (
-            <Card key={i} dir={this.state.direction} data={item} />
-          ))}
-        </Nav_card>
-        <Prev show={this.state.prev_visibility}>
-          <Link onClick={this.prevSlide}>&#10094;</Link>
-        </Prev>
-        <Next show={this.state.next_visibility}>
-          <Link onClick={this.nextSlide}>&#10095;</Link>
-        </Next>
-      </Main>
-    );
+    const { cities_is_loading, cities_list } = this.props || [];
+    if (cities_is_loading !== true && cities_list !== undefined) {
+      return (
+        <Main>
+          <Title>Take a city break in Europe</Title>
+          <Nav_card draggable="true" ref="Nav_card">
+            {cities_list.map((item, i) => (
+              <Card key={i} data={item} index={this.state.index} />
+            ))}
+          </Nav_card>
+          <Prev show={this.state.prev_visibility}>
+            <Link onClick={this.prevSlide}>&#10094;</Link>
+          </Prev>
+          <Next show={this.state.next_visibility}>
+            <Link onClick={this.nextSlide}>&#10095;</Link>
+          </Next>
+        </Main>
+      );
+    } else {
+      return (
+        <>
+          <CityLoader />
+        </>
+      );
+    }
   }
 }
+
+function mapStateToProps(state) {
+  const { cities_list, cities_is_loading, homes_is_loading } = state.homepage;
+
+  return {
+    cities_list,
+    cities_is_loading,
+    homes_is_loading
+  };
+}
+export default connect(mapStateToProps)(CityBreak);
 
 const Main = styled.div`
   color: ${c.grey};
@@ -137,23 +140,27 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: scroll;
+
+  [draggable="true"] {
+    cursor: move;
+  }
+
+  &::-webkit-scrollbar {
+    height: 0px;
+  }
+
+  @media (min-width: 500px) {
+    overflow: hidden;
+  }
 `;
 
 const Nav_card = styled.div`
   display: flex;
-  overflow: hidden;
-  /* width: 90vw; */
+  width: 100%;
 
   @media (min-width: 694px) {
-    /* width: 94vw; */
-  }
-  @media (min-width: 872px) {
-    /* width: 100vw; */
-    /* width: 92vw; */
-  }
-  @media (min-width: 1050px) {
-    /* width: 90vw; */
-    /* width: 93vw; */
+    overflow: hidden;
   }
 `;
 const Next = styled.div`
@@ -190,7 +197,6 @@ const Prev = styled(Next)`
 `;
 
 const Title = styled.h1`
-  /* border: 1px solid red;  */
   font-size: 2.5rem;
   margin-bottom: 1rem;
 `;

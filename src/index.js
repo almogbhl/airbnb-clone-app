@@ -7,13 +7,16 @@ import { Provider } from 'react-redux'
 import configureStore from './configureStore'
 
 
-import { fetchApartments } from './components/Main_section/Browse/Browse.action'
+import { fetchHomes, fetchCities } from './components/Main_section/Home_page/Home_page.action'
 import App from "./App";
 
 
 const store = configureStore()
 
-store.dispatch(fetchApartments())
+
+store.dispatch(fetchCities())
+store.dispatch(fetchHomes())
+
 
 ReactDOM.render(
   <Provider store={store}>

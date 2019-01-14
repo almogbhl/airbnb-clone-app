@@ -3,66 +3,77 @@ import styled from "styled-components";
 import { flexbox } from "../../../styled/functions";
 import * as c from "../../../styled/constants";
 import { connect } from "react-redux";
-import { BrowserRouter, HashRouter, Route } from "react-router-dom";
-import { withRouter } from "react-router";
 import Apartment from "../Apartment/Preview/Apartment";
-import Filters from "./Filters/Filters";
+import HomesLoader from "../../../styled/Loaders/Homes_loader";
 
 class Browse extends Component {
   state = {
-    data_array: []
+    data_array: [],
+    elementsView: true
   };
-  componentDidMount = () => {
+
+  componentDidMount() {
     window.scrollTo(0, 0);
 
-    const { displayed_list, filter_type } = this.props;
-    console.log(filter_type);
+    const { homes_list, filter_type } = this.props;
+
     let filtered_array = [];
 
     if (filter_type === "superHost") {
-      filtered_array = displayed_list.filter(
+      filtered_array = homes_list.filter(
         item => item.superhost == true && item.rating_stars > 3
       );
     } else if (filter_type === "topRated") {
-      filtered_array = displayed_list.filter(item => item.rating_stars === 5);
-    } else if (filter_type === "world") {
-      filtered_array = displayed_list;
+      filtered_array = homes_list.filter(item => item.rating_stars === 5);
+    } else if (filter_type === "Homes") {
+      filtered_array = homes_list;
     } else {
-      filtered_array = displayed_list;
+      filtered_array = homes_list.filter(item =>
+        item.city.toLowerCase().includes(filter_type.toLowerCase()) ||
+        item.country.toLowerCase().includes(filter_type.toLowerCase())
+      );
     }
 
     this.setState({ data_array: filtered_array });
-  };
+  }
 
-  showApartment = (e, item) => {
-    // e.preventDefault();
-    this.props.history.push("/apartmentMain");
-  };
+
+  componentWillMount() {
+    let data = this.state.data_array;
+    if(data.length < 4) {
+      this.setState({elementsView: false})
+    }
+  }
+
 
   render() {
-    return (
-      <Wrapper>
-        <Filters />
-        <MainBox>
-          <Title>Explore all {this.state.data_array.length} homes</Title>
-          <Ul>
-            {this.state.data_array.map(item => (
-              <Li key={item.id}>
-                <Apartment {...item} />
-              </Li>
-            ))}
-          </Ul>
-        </MainBox>
-      </Wrapper>
-    );
+    if (this.state.data_array === [] || this.state.data_array === undefined) {
+      return <HomesLoader />;
+    } else {
+      return (
+        <Wrapper>
+          <MainBox>
+            <Title>Explore all {this.state.data_array.length} homes</Title>
+            <Ul view={this.state.elementsView}>
+              {this.state.data_array.map(item => (
+                <Li key={item.id}>
+                  <Apartment {...item} />
+                </Li>
+              ))}
+            </Ul>
+          </MainBox>
+        </Wrapper>
+      );
+    }
   }
 }
 
 function mapStateToProps(state) {
-  const { displayed_list, filter_type } = state.browse;
+  const { homes_list, homes_is_loading, filter_type } = state.homepage;
 
   return {
-    displayed_list,
+    homes_list,
+    homes_is_loading,
     filter_type
   };
 }
@@ -89,14 +100,15 @@ const Title = styled.h3`
 `;
 
 const Ul = styled.ul`
-  ${flexbox({ j: "space-between" })}
+ display: flex;
+ justify-content: ${props => props.view ? 'space-between' : 'flex-start'};
   flex-wrap: wrap;
 `;
 
 const Li = styled.li`
   list-style: none;
   width: 100%;
-
+  margin-right: ${props => props.view ? '0px' : '1.3rem'};
   @media (min-width: 743px) {
     width: calc(50% - 1.3rem);
   }

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import Loader from "../../../../styled/Loader";
 import Overview from "./Overview/Overview";
 import Gallery from "./Gallery/Gallery";
 import Reviews from "./Reviews/Reviews";
@@ -10,64 +9,93 @@ import Location from "./Location/Location";
 import NavBar from "./Nav_bar/Nav_bar";
 import Booking_request from "./Booking/Booking_request";
 import Booking_form from "./Booking/Booking_form";
+import CityLoader from "../../../../styled/Loaders/City_loader";
 import * as c from "../../../../styled/constants";
+require("dotenv").config();
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class ApartmentMain extends Component {
   state = {
     isFixed: false,
-    galleryHeight: 800
+    galleryHeight: 800,
+    bookingHeight: 267,
+    room: [],
+    posts: [],
+    heights: [],
+    roomid: ''
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const { roomid } = this.props.match.params;
+
+    // rooms
+    const roomsRes = await fetch(`${API_URL}/api/rooms/${roomid}`);
+    const roomData = (await roomsRes.json()) || [];
+    // posts
+    const postsRes = await fetch(`${API_URL}/api/posts`);
+    const postsData = await postsRes.json();
+
+    this.setState({ room: roomData, posts: postsData, roomid });
+
     window.scrollTo(0, 0);
     window.addEventListener("scroll", this.onScroll);
   }
   componentWillUnmount() {
     window.removeEventListener("scroll", this.onScroll);
   }
+
   onScroll = () => {
     if (window.scrollY > this.state.galleryHeight) {
       this.setState({ isFixed: true });
     } else {
       this.setState({ isFixed: false });
     }
+
+    let mainSection = this.refs.mainSection;
+
+    this.setState({
+      bookingHeight: mainSection.clientHeight
+    });
   };
 
   changeHeight = newHeight => {
-    // console.log(newHeight);
     this.setState({ galleryHeight: newHeight + 40 });
   };
 
   render() {
-    // const is_loading = this.props.is_loading;
-    const data = this.props.apartment_data || {};
-    const { posts_data, is_loading } = this.props;
+    const data = this.state.room[0];
+    const posts = this.state.posts;
 
-    if (is_loading === true) {
-      return <Loader></Loader>
-    } else {
+    if (data !== undefined) {
       return (
         <Wrapper onScroll={this.onScroll}>
-          <NavBar show={this.state.isFixed} />
+          <NavBar roomid={this.state.roomid} heights={this.state.heights} show={this.state.isFixed} />
           <Header>
             <Gallery
-              images={data}
+              data={data}
               getHeight={newHeight => this.changeHeight(newHeight)}
             />
           </Header>
           <Conatainer>
-            <Main_section>
-              <Overview {...data} />
-              <Reviews main={data} posts={posts_data} />
+            <Main_section id='overview' ref="mainSection">
+              <Overview  {...data} />
+              <Reviews  main={data} posts={posts} />
               <Host_profile {...data} />
               <Location {...data} />
             </Main_section>
-            <Booking_section>
+            <Booking_section height={this.state.bookingHeight}>
               <Booking_form {...data} />
               <Booking_request {...data} />
             </Booking_section>
           </Conatainer>
         </Wrapper>
+      );
+    } else {
+      return (
+        <>
+          <CityLoader />
+        </>
       );
     }
   }
@@ -84,13 +112,14 @@ function mapStateToProps(state) {
 }
 export default connect(mapStateToProps)(ApartmentMain);
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-bottom: 8rem;
+`;
 const Conatainer = styled.div`
   @media (min-width: 743px) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid red; */
     margin: 0 auto;
     max-width: 110rem;
     min-width: 104rem;
@@ -125,7 +154,10 @@ const Main_section = styled.div`
 const Booking_section = styled.div`
   position: relative;
   flex-basis: 40%;
-  height: 290rem;
   display: flex;
   justify-content: center;
+  /* overflow-x:visible; */
+  @media (min-width: 1028px) {
+    height: ${props => props.height}px;
+  }
 `;

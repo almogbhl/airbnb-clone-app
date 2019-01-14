@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import GoogleMapReact from "google-map-react";
-import { Section } from "../../../../../styled/styled.components";
-import StaticImg from "../../../../../img/staticmap.png";
 
 class Map extends Component {
   state = {
@@ -28,7 +26,6 @@ class Map extends Component {
   };
 
   render() {
-   
     return (
       <Container>
         <Main_box>
@@ -39,9 +36,9 @@ class Map extends Component {
             defaultCenter={this.state.center}
             defaultZoom={this.state.zoom}
           />
-          <Title>
+          {/* <Title>
             Exact location information is provided after a booking is confirmed.
-          </Title>
+          </Title> */}
         </Main_box>
       </Container>
     );
@@ -58,25 +55,17 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps)(Map);
 
-const Container = styled.div`
-  border: 1px solid red;
-  /* width: 100%;
-  height: 100%; */
-`;
+const Container = styled.div``;
 
 const Main_box = styled.div`
-
   z-index: 1;
   margin: 1rem 0;
-  height: 20vh;
-  width: 25vw;
+  height: 250px;
+  width: 100%;
 
-  @media (min-width: 1028px) {
-    height: 40vh;
-    width: 30vw;
+  @media (min-width: 443px) {
+    height: 300px;
   }
 `;
-// const Map = styled.div`
-//   width: 100%;
-// `;
+
 const Title = styled.p``;

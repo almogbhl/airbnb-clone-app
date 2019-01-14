@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
 import Super_host from './Super_host';
 import Profile from './Profile';
 import About_host from './About_host';
@@ -16,7 +15,7 @@ class Host_profile extends Component {
         <Profile {...data} />
         <DivBorder />
         <Super_host show={superhost}/>
-        <DivBorder />
+        <DivBorder show={!superhost} />
         <About_host />
         <DivBorder />
         <Safety />

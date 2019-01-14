@@ -6,10 +6,15 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  text-decoration: none;
 }
 
 html {
   font-size: 62.5%;
+}
+
+:root {
+  overflow-x: hidden;
 }
 
 body {
@@ -19,12 +24,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 `;
+
 
 export default GlobalStyle;

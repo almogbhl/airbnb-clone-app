@@ -14,7 +14,7 @@ class Host_profile extends Component {
     } = this.props;
     return (
       <Section>
-        <User_box>
+        <User_box id="profile">
           <User_name>{`Hosted by ${host_first_name} ${host_last_name}`}</User_name>
           <Info_box>
             <Location>{`${city}, ${country} ·`}</Location>

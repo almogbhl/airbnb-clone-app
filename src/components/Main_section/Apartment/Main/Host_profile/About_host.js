@@ -64,10 +64,11 @@ const Button = styled.button`
   /* width: 10rem; */
   /* height: 2rem; */
   border-radius: 0.4rem;
-  border: 0.1rem solid ${c.blue};
   background-color: white;
   color: ${c.blue};
   font-weight: bold;
   padding: 0.8rem 1.7rem;
+  border: 0.1rem solid ${c.blue};
   font-size: 1.5rem;
+  cursor: pointer;
 `;

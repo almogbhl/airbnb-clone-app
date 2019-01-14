@@ -1,60 +1,63 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Route, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import RateStar from "../Rating/rating";
 import * as c from "../../../../styled/constants";
-import { getApartment } from "../../Browse/Browse.action";
-import { fetchPosts } from "./Apartment.action";
+import { filterType } from "../../Home_page/Filtered/Filitered.action";
+import {Link} from 'react-router-dom'
 
 class Apartment extends Component {
-  showApartment = () => {
-    const data = this.props;
-    this.props.do_get_apartment(data);
-    this.props.do_fetchPosts();
-    this.props.history.push("/apartmentMain");
-  };
+
+  sendType = () => {
+    this.props.do_filter_type('roomMode');
+  }
 
   render() {
     const {
       city,
       country,
       price,
-      images,
+      img,
       rating_stars,
-      rating_total
+      rating_total,
+      room_id
     } = this.props;
 
     return (
-      <Box onClick={this.showApartment}>
-        <ImgBox>
-          <Img src={images.preview} />
-        </ImgBox>
+      <Link to={`/rooms/${room_id}`}>
+        <Box onClick={this.showApartment} onClick={this.sendType}>
+          <ImgBox>
+            <Img src={img} />
+          </ImgBox>
 
-        <InfoBox>
-          <Title>{country}</Title>
-          <Sub_title>Stylish Studio in {city} city</Sub_title>
-          <H3>{` ${price}$ per night · Free cancellation`}</H3>
-          <RateStar num={rating_stars} type="AP_preview" size="1rem" />
-          <Span>{rating_total}</Span>
-        </InfoBox>
-      </Box>
+          <InfoBox>
+            <Title>{country}</Title>
+            <Sub_title>Stylish Studio in {city} city</Sub_title>
+            <H3>{` $${price} per night · Free cancellation`}</H3>
+            <RateStar num={rating_stars} type="AP_preview" size="1rem" />
+            <Span>{rating_total}</Span>
+          </InfoBox>
+        </Box>
+      </Link>
     );
   }
 }
 
 
 
+
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-      do_get_apartment: (data) => dispatch(getApartment(data)),
-      do_fetchPosts: () => dispatch(fetchPosts())
-      
-  }
+    do_filter_type: type => dispatch(filterType(type))
+  };
 }
-
-export default withRouter(connect(null, mapDispatchToProps)(Apartment));
-
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Apartment)
+);
 
 const Box = styled.main`
   display: flex;

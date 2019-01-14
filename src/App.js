@@ -9,6 +9,8 @@ import ApartmentMain from "./components/Main_section/Apartment/Main/Apartment_ma
 import HomePage from "./components/Main_section/Home_page/Home_page";
 import { DivBorder } from "./styled/styled.components";
 
+
+
 class App extends Component {
   render() {
     return (
@@ -17,19 +19,15 @@ class App extends Component {
         <GlobalStyle />
         <TopBar />
 
-        {/* <Browse /> */}
-        {/* <ApartmentMain /> */}
-        {/* <HomePage /> */}
-
         <Route exact path="/" component={ HomePage } />
-        <Route path="/browse" component={ Browse } />
-        <Route path="/apartmentMain" component={ApartmentMain} />
 
+        <Route path="/homes" component={ Browse } />
+       
+
+        <Route path="/rooms/:roomid" component={ApartmentMain} />
 
         <DivBorder />
         <Footer />
-
-        
         
       </Wrapper>
       </BrowserRouter>

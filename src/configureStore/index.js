@@ -19,7 +19,6 @@ export default function configureStore() {
 
   const enhancers = [monitorReducersEnhancer,middlewareEnhancer]
   const composedEnhancers = composeWithDevTools(...enhancers)
-  //const composedEnhancers = compose(...enhancers)
 
   const preloadedState = get_local_state()
   const store = createStore(rootReducer, preloadedState, composedEnhancers)

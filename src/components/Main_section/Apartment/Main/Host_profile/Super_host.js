@@ -30,10 +30,11 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Host_profile);
 
 const SuperHost_box = styled.div`
-  visibility: ${props => (props.show ? 'visible' : 'hidden')};
+  display: ${props => (props.show ? "block" : "none")};
 `;
 const Title = styled.span`
-font-weight: bold;`;
+  font-weight: bold;
+`;
 const Des = styled.span`
   margin-left: 3px;
 `;

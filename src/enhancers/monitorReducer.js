@@ -10,7 +10,7 @@ const monitorReducerEnhancer = createStore => (
     const end = performance.now()
     const raw = end - start
     const diff = (end - start).toFixed(2)
-    console.log(`%c reducer process time`,'background: cyan; color: blue', diff)
+    // console.log(`%c reducer process time`,'background: cyan; color: blue', diff)
     return newState
   }
   return createStore(monitoredReducer, initialState, enhancer)

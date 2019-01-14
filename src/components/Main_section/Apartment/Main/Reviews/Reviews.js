@@ -29,7 +29,7 @@ class Reviews extends Component {
     } = this.props.main;
 
     return (
-      <Container>
+      <Container id="reviews">
         <Section>
           <Title_box>
             <Title>{`${rating_total} Reviews`}</Title>
@@ -101,6 +101,7 @@ const Input = styled.input`
 const Post_box = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 `;
 const Rating = styled.div`
   display: flex;

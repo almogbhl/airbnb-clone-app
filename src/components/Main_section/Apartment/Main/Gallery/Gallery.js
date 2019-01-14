@@ -5,10 +5,6 @@ import * as c from '../../../../../styled/constants';
 
 class Gallery extends Component {
 
-  componentDidMount() {
-    // console.log(this.props);
-  }
-
   onHover = (e, isMouseHover) => {
     let imgs = this.refs.container.childNodes;
 
@@ -29,11 +25,11 @@ class Gallery extends Component {
   }
 
   render() {
- 
-    // const { images } = this.props;
-    const data = this.props.images;
-    // console.log(images)
-    const gallery = data && data.images ? data.images.img_gallery : [] ;
+
+    const data = this.props.data;
+   
+    const gallery = data.images || [] ;
+    
     const [main_img, img_box_2, img_box_3, img_box_4] = gallery;
 
     return (

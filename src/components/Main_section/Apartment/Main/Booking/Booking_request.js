@@ -87,4 +87,5 @@ const Button = styled.button`
   border: none;
   border-radius: 0.4rem;
   font-size: 1.6rem;
+  cursor: pointer;
 `;

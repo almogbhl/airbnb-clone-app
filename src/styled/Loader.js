@@ -8,6 +8,8 @@ class Loader extends Component {
     return (
     <Loader_box>
         <Dot></Dot>
+        <Dot></Dot>
+        <Dot></Dot>
     </Loader_box>
     );
   }

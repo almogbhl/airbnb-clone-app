@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
 import { Section } from "../../../../../styled/styled.components";
-import * as c from "../../../../../styled/constants";
 import Neighborhood from './Neighborhood';
 import Map from './Map';
 
@@ -10,7 +8,7 @@ class Location extends Component {
   render() {
     const data = this.props;
     const { lon, lnt } = this.props;
-    console.log(lon, lnt)
+  
     return (
       <Section>
         <Neighborhood {...data} />

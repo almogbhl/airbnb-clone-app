@@ -36,8 +36,6 @@ class Overview extends Component {
         </Summery_Box>
         <Info_main>
           <InfoBox {...data} />
-          <InfoBox {...data} />
-          <InfoBox {...data} />
         </Info_main>
         <DivBorder />
         <Space data={about_host} />

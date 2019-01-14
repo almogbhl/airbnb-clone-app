@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Section } from "../../../../../styled/styled.components";
 import * as c from "../../../../../styled/constants";
 import RateStar from "../../Rating/rating";
 import "react-dates/lib/css/_datepicker.css";
@@ -78,11 +77,12 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Booking_form);
 
 const Main = styled.div`
+
   width: 100%;
   width: 37rem;
   height: 36rem;
   position: sticky;
-  top: 7rem;
+  top: 8rem;
   right: 0;
   display: none;
   border: 1px solid ${c.lightGrey};
@@ -92,12 +92,12 @@ const Main = styled.div`
   @media (min-width: 1028px) {
     display: flex;
     flex-direction: column;
+   
   }
 `;
 
 const Price_box = styled.div`
   border-bottom: 1px solid ${c.lightGrey};
-  /* border: 1px solid tomato; */
   margin: 1rem 0;
   height: 5rem;
   flex-basis: 20%;
@@ -156,14 +156,11 @@ const Book = styled.button`
   cursor: pointer;
 `;
 const Input_box = styled.div`
-  /* border: 1px solid blue; */
   margin-bottom: 2rem;
 `;
 const Subtitle = styled.p`
   font-size: 1.2rem;
   margin: 1rem 0;
-
   text-align: center;
-
   color: ${c.grey};
 `;
