@@ -13,7 +13,8 @@ class CityBreak extends Component {
     nav_width: 0,
     prev_visibility: false,
     next_visibility: true,
-    screen_size: 400
+    screen_size: 400,
+    card_width: 0
   };
 
   componentWillMount = () => {
@@ -40,13 +41,13 @@ class CityBreak extends Component {
 
     let data = this.props.cities_list;
     let nav = this.refs.Nav_card;
-
     let card_width = nav.childNodes[0].clientWidth;
     let nav_width = nav.clientWidth;
-    let max_index = data.length - Math.floor(nav_width / card_width);
+    let max_index = data.length - Math.round(nav_width / card_width) - 1;
 
     this.setState({
-      max_index
+      max_index,
+      card_width
     });
   };
 
@@ -76,13 +77,13 @@ class CityBreak extends Component {
       index: index - 1
     });
 
-    if (index <= 0) {
+    if (index <= 1) {
       this.setState({
         prev_visibility: false
       });
     }
 
-    if (index > 0) {
+    if (index > 1) {
       this.setState({
         prev_visibility: true
       });
@@ -108,7 +109,8 @@ class CityBreak extends Component {
                   key={i}
                   data={item}
                   index={this.state.index}
-                  size={this.state.screen_size}
+                  navWidth={this.state.screen_size}
+                  cardWidth={this.state.card_width}
                 />
               ))}
             </Nav_card>

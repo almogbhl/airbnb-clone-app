@@ -6,17 +6,13 @@ import { withRouter } from "react-router";
 import { filterType } from "../Filtered/Filitered.action";
 
 class Card extends Component {
-  state = {
-    move: 333
-  };
-
+ 
   move = () => {
-    const index = this.props.index;
-    const card = this.refs.box || 333;
+    let index = this.props.index;
+    let cardWidth = this.props.cardWidth;
 
-    let card_width = card.clientWidth + 15;
-    let move = index * card_width;
-
+    let move = index * cardWidth ;
+  
     return move;
   };
 
@@ -33,7 +29,7 @@ class Card extends Component {
           onClick={this.show_full_list}
           ref="box"
           move={this.move}
-          size={this.props.size}
+          size={this.props.navWidth}
         >
           <Img src={src} />
           <Gradiant />
