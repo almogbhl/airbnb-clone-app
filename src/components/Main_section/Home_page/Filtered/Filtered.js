@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -18,35 +19,41 @@ class Filtered extends Component {
     type: "world"
   };
 
-  componentDidMount() {
-    const data = this.props.homes_list || [];
-    const type = this.props.type;
+  async componentDidMount() {
+    const API_URL = process.env.REACT_APP_API_URL;
+    const API = `${API_URL}/api/homes`
+    
+    const homesRes = await fetch(API);
+    const homesData = await homesRes.json();
 
+    const type = this.props.type;
+    
     this.setState({ type });
 
     let filtered_array = [];
 
     if (type === "superHost") {
-      filtered_array = data.filter(
+      filtered_array = homesData.filter(
         item => item.superhost == true && item.rating_stars > 3
       );
       this.setState({
         title: "Stay with a Superhost"
       });
     } else if (type === "topRated") {
-      filtered_array = data.filter(item => item.rating_stars === 5);
+      filtered_array = homesData.filter(item => item.rating_stars === 5);
       this.setState({
         title: "Stay at top-rated homes"
       });
     } else if (type === "Homes") {
-      filtered_array = data;
+      filtered_array = homesData;
       this.setState({
         title: "Homes around the world"
       });
     }
 
     this.setState({
-      original_data: filtered_array
+      original_data: filtered_array,
+      modified_data: filtered_array
     }, () => this.updateDimensions() ); 
   }
 
@@ -81,6 +88,7 @@ class Filtered extends Component {
   printItems = numOfItems => {
     let custom_array = [];
     let data = this.state.original_data;
+
     for (let i = 1; i <= numOfItems; i++) {
       custom_array.push(data[i]);
     }
@@ -115,14 +123,6 @@ class Filtered extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { homes_list, homes_is_loading } = state.homepage;
-
-  return {
-    homes_list,
-    homes_is_loading
-  };
-}
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     do_filter_type: type => dispatch(filterType(type))
@@ -130,7 +130,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 }
 export default withRouter(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )(Filtered)
 );

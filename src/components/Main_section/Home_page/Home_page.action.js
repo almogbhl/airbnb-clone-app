@@ -1,4 +1,4 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
 // cities
 export const FETCHING_CITIES    = "FETCHING_CITIES";
 export const CITIES_FETCHED     = "CITIES_FETCHED";

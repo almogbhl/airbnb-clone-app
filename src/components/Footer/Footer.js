@@ -235,7 +235,6 @@ const Container = styled.footer`
   padding: 2rem 2.4rem;
   z-index: 999;
   @media (min-width: 1028px) {
-    border-top: 1px solid ${c.lightGrey};
     height: 37.5rem;
     display: flex;
   }

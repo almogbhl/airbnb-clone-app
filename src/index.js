@@ -14,8 +14,8 @@ import App from "./App";
 const store = configureStore()
 
 
-store.dispatch(fetchCities())
 store.dispatch(fetchHomes())
+store.dispatch(fetchCities())
 
 
 ReactDOM.render(

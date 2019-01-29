@@ -22,7 +22,6 @@ class App extends Component {
         <Route exact path="/" component={ HomePage } />
 
         <Route path="/homes" component={ Browse } />
-       
 
         <Route path="/rooms/:roomid" component={ApartmentMain} />
 
