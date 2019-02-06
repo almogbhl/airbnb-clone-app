@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { flexbox } from "../../../styled/functions";
 import * as c from "../../../styled/constants";
 import { connect } from "react-redux";
 import Apartment from "../Apartment/Preview/Apartment";
@@ -18,13 +17,10 @@ class Browse extends Component {
     const { homes_list, filter_type } = this.props;
 
     let filtered_array = [];
-
     if (filter_type === "superHost") {
       filtered_array = homes_list.filter(
         item => item.superhost == true && item.rating_stars > 3
       );
-    } else if (filter_type === "topRated") {
-      filtered_array = homes_list.filter(item => item.rating_stars === 5);
     } else if (filter_type === "Homes") {
       filtered_array = homes_list;
     } else {
@@ -55,8 +51,8 @@ class Browse extends Component {
           <MainBox>
             <Title>Explore all {this.state.data_array.length} homes</Title>
             <Ul view={this.state.elementsView}>
-              {this.state.data_array.map(item => (
-                <Li key={item.id}>
+              {this.state.data_array.map((item, i) => (
+                <Li key={i}>
                   <Apartment {...item} />
                 </Li>
               ))}

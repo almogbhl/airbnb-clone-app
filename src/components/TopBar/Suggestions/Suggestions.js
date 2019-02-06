@@ -4,7 +4,7 @@ import * as c from "../../../styled/constants";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { filterType } from "../../Main_section/Home_page/Filtered/Filitered.action";
+import { filterType } from "../../Main_section/Home_page/Filtered_homes_types/Filitered.action";
 
 class Suggestions extends Component {
   state = { show: true, wider: false };

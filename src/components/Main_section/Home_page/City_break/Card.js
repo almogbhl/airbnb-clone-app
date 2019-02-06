@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
-import { filterType } from "../Filtered/Filitered.action";
+import { filterType } from "../Filtered_homes_types/Filitered.action";
 
 class Card extends Component {
  

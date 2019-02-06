@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -10,64 +10,22 @@ import { filterType } from "./Filitered.action";
 import HomesLoader from "../../../../styled/Loaders/Homes_loader";
 import { Link } from "react-router-dom";
 
-class Filtered extends Component {
+class FilteredHomesTypes extends Component {
   state = {
-    modified_data: [],
-    original_data: [],
-    imgBox: 0,
-    title: "",
-    type: "world"
+    modified_data: []
   };
-
-  async componentDidMount() {
-    const API_URL = process.env.REACT_APP_API_URL;
-    const API = `${API_URL}/api/homes`
-    
-    const homesRes = await fetch(API);
-    const homesData = await homesRes.json();
-
-    const type = this.props.type;
-    
-    this.setState({ type });
-
-    let filtered_array = [];
-
-    if (type === "superHost") {
-      filtered_array = homesData.filter(
-        item => item.superhost == true && item.rating_stars > 3
-      );
-      this.setState({
-        title: "Stay with a Superhost"
-      });
-    } else if (type === "topRated") {
-      filtered_array = homesData.filter(item => item.rating_stars === 5);
-      this.setState({
-        title: "Stay at top-rated homes"
-      });
-    } else if (type === "Homes") {
-      filtered_array = homesData;
-      this.setState({
-        title: "Homes around the world"
-      });
-    }
-
-    this.setState({
-      original_data: filtered_array,
-      modified_data: filtered_array
-    }, () => this.updateDimensions() ); 
-  }
-
-  componentWillMount() {
-    window.addEventListener("resize", this.updateDimensions);
-  }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
   }
 
+  componentDidMount() {
+    this.updateDimensions();
+  }
+
   updateDimensions = () => {
     let screen_size = window.innerWidth;
-    
+
     // breaking points
     const break1 = 970;
     const break2 = 1240;
@@ -87,31 +45,35 @@ class Filtered extends Component {
 
   printItems = numOfItems => {
     let custom_array = [];
-    let data = this.state.original_data;
+    const filteredHomesList  = this.props.data[0] || [];
 
     for (let i = 1; i <= numOfItems; i++) {
-      custom_array.push(data[i]);
+      custom_array.push(filteredHomesList[i]);
     }
 
     this.setState({ modified_data: custom_array });
   };
 
   show_full_list = () => {
-    this.props.do_filter_type(this.state.type);
+    const type = this.props.data[2];
+    this.props.do_filter_type(type);
   };
 
   render() {
-    if (this.props.homes_is_loading === true || this.state.modified_data[0] === undefined) {
+    const title = this.props.data[1];
+    let data = this.state.modified_data;
+
+    if (data[0] === undefined) {
       return <HomesLoader />;
     } else {
       return (
         <MainBox>
           <Link to={`/homes`}>
-            <Title onClick={this.show_full_list}>{this.state.title}</Title>
+            <Title onClick={this.show_full_list}>{title}</Title>
           </Link>
 
           <Ul>
-            {this.state.modified_data.map((item, i) => (
+            {data.map((item, i) => (
               <Li key={i}>
                 <Apartment {...item} />
               </Li>
@@ -132,7 +94,7 @@ export default withRouter(
   connect(
     null,
     mapDispatchToProps
-  )(Filtered)
+  )(FilteredHomesTypes)
 );
 
 const MainBox = styled.main`
@@ -169,30 +131,29 @@ const Title = styled.h1`
 `;
 const SubTitle = styled.span``;
 
+//  const filterTypeConfig = {
+//     superHost: {
+//       title: "Stay with a Superhost",
+//       filterType: data.filter(
+//         item => item.superhost == true && item.rating_stars > 3
+//       )
+//     },
+//     topRated: {
+//       title: "Stay at top-rated homes",
+//       filterType: data.filter(item => item.rating_stars === 5)
+//     },
+//     world: {
+//       title: "Homes around the world",
+//       filterType: data
+//     }
+//   };
 
-  //  const filterTypeConfig = {
-    //     superHost: {
-    //       title: "Stay with a Superhost",
-    //       filterType: data.filter(
-    //         item => item.superhost == true && item.rating_stars > 3
-    //       )
-    //     },
-    //     topRated: {
-    //       title: "Stay at top-rated homes",
-    //       filterType: data.filter(item => item.rating_stars === 5)
-    //     },
-    //     world: {
-    //       title: "Homes around the world",
-    //       filterType: data
-    //     }
-    //   };
+// const config = filterTypeConfig;
 
-    // const config = filterTypeConfig;
-
-    // if (type === config[type]) {
-    //   filtered_array = config[type].filterType;
-    //   this.setState({
-    //     title: config.title,
-    //     filtered_data: filtered_array
-    //   });
-    // }
+// if (type === config[type]) {
+//   filtered_array = config[type].filterType;
+//   this.setState({
+//     title: config.title,
+//     filtered_data: filtered_array
+//   });
+// }

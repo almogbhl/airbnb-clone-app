@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import RateStar from "../Rating/rating";
 import * as c from "../../../../styled/constants";
-import { filterType } from "../../Home_page/Filtered/Filitered.action";
+import { filterType } from "../../Home_page/Filtered_homes_types/Filitered.action";
 import {Link} from 'react-router-dom'
 
 class Apartment extends Component {

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import * as c from "../../../../styled/constants";
 import Card from "./Card";
+import { fetchCities } from '../City_break/City_break.action';
 import CityLoader from "../../../../styled/Loaders/City_loader";
 
 class CityBreak extends Component {
@@ -18,6 +19,7 @@ class CityBreak extends Component {
   };
 
   componentWillMount = () => {
+    this.props.do_fetchCities();
     this.updateScreenSize();
     window.addEventListener("resize", this.updateDimensions);
   };
@@ -142,7 +144,12 @@ function mapStateToProps(state) {
     homes_is_loading
   };
 }
-export default connect(mapStateToProps)(CityBreak);
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    do_fetchCities: () => dispatch(fetchCities())
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CityBreak);
 
 const Main = styled.div`
   color: ${c.grey};

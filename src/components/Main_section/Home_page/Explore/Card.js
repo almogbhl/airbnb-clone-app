@@ -4,7 +4,7 @@ import { Route, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import * as c from "../../../../styled/constants";
 import { flexbox } from "../../../../styled/functions";
-import { filterType } from "../Filtered/Filitered.action";
+import { filterType } from "../Filtered_homes_types/Filitered.action";
 import {Link} from 'react-router-dom'
 
 class Card extends Component {

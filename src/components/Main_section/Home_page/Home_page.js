@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Explore from "./Explore/Explore";
 import CityBreak from "./City_break/City_break";
-import Filtered from "./Filtered/Filtered";
+import FilteredHomesMain from "./Filtered_homes_types/Main_filtered_homes";
 
 export default class HomePage extends Component {
   render() {
@@ -10,8 +10,7 @@ export default class HomePage extends Component {
       <Wrapper>
         <Explore />
         <CityBreak />
-        <Filtered type="superHost" />
-        <Filtered type="Homes" />
+        <FilteredHomesMain />
       </Wrapper>
     );
   }
