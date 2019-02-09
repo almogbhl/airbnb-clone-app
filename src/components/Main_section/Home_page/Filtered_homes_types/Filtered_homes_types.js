@@ -15,6 +15,9 @@ class FilteredHomesTypes extends Component {
     modified_data: []
   };
 
+  componentWillMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
   }
